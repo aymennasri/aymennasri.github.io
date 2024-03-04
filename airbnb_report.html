@@ -1700,9 +1700,7 @@ not</h4>
 </div>
 <pre class="r"><code>is.Date(last_review_data$last_review)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>The observations are dates in the format %B %d %Y, we have to
-transform them to the %Y-%m-%d format using the anydate function from
-the library anytime.</p>
+<p>The dates are simply strings, we have to transform them to an actual date type using the anydate function from the library anytime.</p>
 <pre class="r"><code>new_rev_data &lt;- last_review_data %&gt;% 
   cbind(last_review_date = anydate(last_review_data$last_review)) %&gt;%
   select(-last_review)
