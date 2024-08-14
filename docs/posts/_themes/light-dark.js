@@ -14,23 +14,24 @@ function updateImageSrc() {
     document.querySelectorAll(selector).forEach(updateFunc);
   };
 
-  // Update image sources
+  // Update ggplots
   updateElements('img', img => {
     const newSrc = img.src.replace(isLightMode ? '.dark' : '.light', isDarkMode ? '.dark' : '.light');
     if (newSrc !== img.src) img.src = newSrc;
   });
 
-  // Update SVG background and legend fill
+  // Update plotly background and legend fill
   const updateStyle = (elem, prop, lightValue, darkValue) => {
     const currentValue = elem.style[prop];
     const newValue = isDarkMode ? darkValue : lightValue;
     if (currentValue !== newValue) elem.style[prop] = newValue;
   };
 
+
   updateElements('svg[style*="background"]', svg => updateStyle(svg, 'background', 'rgb(255, 241, 229)', 'rgb(34, 34, 34)'));
   updateElements('rect[style*="fill"]', rect => updateStyle(rect, 'fill', 'rgb(255, 241, 229)', 'rgb(34, 34, 34)'));
 
-  // Update text styles
+  // Update plotly text color
   updateElements('text[class*="legendtext"], svg text, svg tspan', text => {
     if (!text.dataset.originalStyle) {
       const computedStyle = window.getComputedStyle(text);

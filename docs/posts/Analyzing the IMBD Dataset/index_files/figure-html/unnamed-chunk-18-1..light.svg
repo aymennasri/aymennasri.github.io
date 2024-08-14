@@ -48,11 +48,11 @@
 <rect x='243.66' y='128.23' width='75.06' height='182.68' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #984EA3;' />
 <rect x='160.26' y='140.56' width='75.06' height='170.34' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #377EB8;' />
 <rect x='76.87' y='148.01' width='75.06' height='162.89' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E41A1C;' />
-<text x='447.98' y='16.48' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$8550.00M</text>
-<text x='364.59' y='48.44' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$7608.99M</text>
-<text x='281.19' y='124.20' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$5378.29M</text>
-<text x='197.79' y='136.54' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$5015.19M</text>
-<text x='114.40' y='143.99' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$4795.90M</text>
+<text x='447.98' y='16.48' text-anchor='middle' style='font-size: 11.04px;fill: #7F7F7F; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$8550.00M</text>
+<text x='364.59' y='48.44' text-anchor='middle' style='font-size: 11.04px;fill: #7F7F7F; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$7608.99M</text>
+<text x='281.19' y='124.20' text-anchor='middle' style='font-size: 11.04px;fill: #7F7F7F; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$5378.29M</text>
+<text x='197.79' y='136.54' text-anchor='middle' style='font-size: 11.04px;fill: #7F7F7F; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$5015.19M</text>
+<text x='114.40' y='143.99' text-anchor='middle' style='font-size: 11.04px;fill: #7F7F7F; font-family: "Liberation Sans";' textLength='62.16px' lengthAdjust='spacingAndGlyphs'>$4795.90M</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
 <polyline points='64.36,325.42 64.36,5.98 ' style='stroke-width: 1.16; stroke: #586E75; stroke-linecap: butt;' />
