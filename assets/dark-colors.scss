@@ -1,0 +1,32 @@
+/*-- scss:defaults --*/
+
+
+$spc-primary:         #A74219 !default;
+$spc-secondary:       #222222 !default;
+$spc-primary-light:   #CCC1B7 !default;
+$spc-secondary-light: #A74219 !default;
+$spc-accent:          #002b36 !default;
+$spc-accent-light:    #FAF0E2 !default;
+$spc-accent-dark:     #A74219 !default;
+$primary-dark:        #FFF1E5 !default;
+$spc-bg:              #FFF1E5 !default;
+$accent-dark:         #2E3440 !default;
+
+$spc-bg-0:            #222222 !default;
+$spc-bg-1:            lighten($spc-primary-light, 40%) !default;
+$spc-bg-00:           lighten($spc-primary-light, 60%) !default;
+
+// Colors: Quarto variables
+$primary:                    $spc-primary-light;
+$secondary:                  $spc-secondary-light;
+// Colors: custom variables
+$primary-dark:               $spc-primary;
+$secondary-light:            $spc-secondary;
+$accent:                     $spc-accent; 
+$accent-light:               $spc-accent-light;
+$accent-dark:                $spc-accent-dark;
+
+// Body
+$body-color:                 #FFF1E5;
+$body-bg:                    $spc-bg-0;
+$body-secondary:             #9DA3AA; // 6c757d

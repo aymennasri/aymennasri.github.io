@@ -1,0 +1,27 @@
+/*-- scss:defaults --*/
+
+$spc-primary:         #0E171E !default;
+$spc-secondary:       #A74219 !default;
+$spc-primary-light:   #CCC1B7 !default;
+$spc-secondary-light: #A77219 !default;
+$spc-accent:          #002b36 !default;
+$spc-accent-light:    #FAF0E2 !default;
+$spc-accent-dark:     #A74219 !default;
+$primary-dark:        #002642 !default;
+$spc-bg:              #FFF1E5 !default;
+$accent-dark:         #9DA3AA !default;
+
+// Colors: Quarto variables
+$primary:                    $spc-primary-light;
+$secondary:                  $spc-secondary;
+// Colors: custom variables
+$primary-dark:               $spc-primary;
+$secondary-light:            $spc-secondary-light;
+$accent:                     $spc-accent; 
+$accent-light:               $spc-accent-light;
+$accent-dark:                $spc-accent-dark;
+
+// Body
+$body-color:                 $primary-dark;
+$body-bg:                    $spc-bg;
+$body-secondary:             grey;

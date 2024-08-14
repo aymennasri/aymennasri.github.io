@@ -1,0 +1,297 @@
+/*-- scss:defaults --*/
+
+// Quarto references:
+// Variables: https://github.com/quarto-dev/quarto-cli/src/resources/formats/html/bootstrap/_bootstrap-variables.scss
+// Rules: https://github.com/quarto-dev/quarto-cli/src/resources/formats/html/bootstrap/_bootstrap-rules.scss
+
+// Fonts
+
+// stylelint-disable-next-line value-keyword-case
+$font-family-sans-serif:     "Commissioner";
+$headings-font-family:       "Libre Baskerville";
+$navbar-font-family:         "Libre Baskerville";
+
+$headings-font-weight:       400;
+
+// Links
+
+$link-color:                  $secondary;
+$link-decoration:             underline;
+$link-hover-color:            darken(#FFF1E5, 40%);
+$link-hover-decoration:       none;
+
+// Tables
+
+$table-border-color:          #555555;
+$table-group-separator-color: lighten($primary, 40%);
+$table-caption-color:         $body-secondary;
+
+// Code blocks
+$code-block-border:          $body-bg;
+
+// Inline code
+$code-color:                  $body-bg;
+$code-bg:                     #FFF1E5;
+
+// Table of contents
+$toc-color:                   $link-color;
+$toc-active-border:           $toc-color;
+$toc-inactive-border:         lighten($toc-color, 50%);
+
+// Navbar icons
+$navbar-fg:                   $secondary;
+
+// Footer text
+$footer-fg:                   $primary;
+
+// table variable overrides
+$table-group-separator-color: lighten($primary, 25%);
+$table-group-separator-color-lighter: lighten($primary, 50%);
+
+// Miscellaneous (workarounds)
+$gray-200:                    lighten($primary, 60%);
+$gray-700:                    lighten($primary, 60%);
+
+/*-- scss:rules --*/
+
+
+// Code
+
+
+// code with filename
+.code-with-filename .code-with-filename-file {
+  color: $code-color;
+  background-color: $code-bg !important; // $code-bg
+  border: 1px solid $code-block-border;
+  border-bottom: none;
+  pre {
+    background-color: $code-bg !important;
+  }
+}
+
+// code output
+pre code {
+  color: $primary;
+}
+
+// Blockquotes
+.blockquote {
+  color: lighten($primary, 15%);
+  font-style: oblique;
+}
+
+// Social icons
+
+
+
+// home + about pages
+.about-links .about-link i {
+  color: $secondary !important;
+  
+
+  &:hover {
+    color: darken(#FFF1E5, 40%) !important;
+  }
+}
+
+// Contact
+
+// social links
+.link-dark.me-1 i {
+  color: $secondary !important;
+}
+
+//// custom substack embed
+//#custom-substack-embed p.success {
+//  color: #FFFBF2 !important;
+//}
+
+// Buttons
+
+// post links
+.btn-secondary {
+  color: $secondary;
+  background: transparent;
+  border-radius: 5px;
+}
+
+// contact form
+.btn-primary:hover {
+  background-color: $secondary;
+  border-color: $secondary;
+}
+
+// pagination
+.page-link {
+  color: $primary;
+  &:hover {
+    color: white;
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
+
+// Categories
+
+// posts
+.quarto-category {
+  background-color: $body-bg;
+  color: $primary;
+  border-color: #222222;
+  &:hover {
+    background-color: $primary;
+    color: $body-bg;
+  }
+}
+
+// listings
+.listing-category {
+  color: $secondary !important;
+  border-color: $secondary !important;
+  &:hover {
+  background-color: $secondary;
+  color: white !important;
+  }
+}
+
+// Navbar
+
+// header
+.navbar {
+  background: transparent;
+  
+}
+
+
+// links
+.navbar-nav .nav-link {
+    color: $secondary !important;
+    text-transform: uppercase;
+    letter-spacing: .1em; 
+    border-bottom: 0px hidden $secondary;    
+    margin: 0px 10px 0px 10px; 
+    padding: 2px 2px 4px 2px !important;
+
+    &:hover {
+      border-bottom: 1px solid $secondary !important;
+      padding: 2px 2px 0px 2px !important;
+    }
+}
+
+// Footer
+
+// links on left side
+.nav-footer-left a {
+    color: $secondary;
+    // link on hover
+    &:hover {
+      color: lightblue;
+    }
+}
+
+// links on right side
+.nav-footer-right a {
+      color: $secondary;
+
+    &:hover {
+      color: darken(#FFF1E5, 40%);
+      text-decoration: underline;
+    }
+}
+
+// Listing cards
+.card {
+  background: $spc-bg-1 !important;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px $spc-bg-00 !important;
+}
+
+.card-img {
+    border-radius: 4px 4px 0px 0px;
+}
+
+// Title block
+
+// make nav bar be centered in mobile
+
+
+// links in description
+
+.description a {
+  text-decoration: underline !important;
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+// Throughout the site
+
+// title
+.title {
+  font-size: 2.5em;
+  font-weight: 500;
+  line-height: 1.1em;
+}
+
+// subtitle + Learn More About Me
+.subtitle {
+  font-size: 1.2em;
+  // links within subtitles
+  a {
+    color: white;
+    text-decoration: underline !important;
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
+}
+
+// details/summaries
+details > summary {
+  color: $body-secondary;
+}
+
+// Mobile
+
+@media screen and (max-width: 991.98px) {
+  .fixed-top {
+  position: absolute;
+}
+
+.aa-DetachedOverlay {
+  position: absolute;
+}
+  // social media links
+  .about-entity .about-links {
+    flex-direction: row !important;
+    justify-content: center !important;
+  }
+
+  // navigation footer
+  .nav-footer {
+      flex-direction: row;
+    }
+
+  .nav-footer-center {
+    order: 1 !important;
+    flex-basis: 100%;
+    margin: 0 0 -1.2em 0;
+  }
+
+  .nav-footer-right {
+    order: 2 !important;
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .nav-footer-left {
+    order: 3 !important;
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .navbar .quarto-navbar-tools {
+    text-align: left;
+  }
+}
