@@ -1,4 +1,4 @@
-theme_dark <- function() {
+dark_theme <- function() {
   ggthemes::theme_solarized_2(light = F) %+%
     theme(
       text = element_text(colour = "white"),
@@ -13,13 +13,14 @@ theme_dark <- function() {
       axis.ticks = element_line(colour = "white"),
       plot.title = element_text(colour = "white"),
       plot.subtitle = element_text(colour = "white"),
-      plot.caption = element_text(colour = "white")
+      plot.caption = element_text(colour = "white"),
+      legend.background = element_rect(fill = "#222222")
     )
 }
 
 darksvglite <- function(file, width, height) {
   on.exit(reset_theme_settings())
-  theme_set(theme_dark())
+  theme_set(dark_theme())
   ggsave(
     filename = file,
     width = width,

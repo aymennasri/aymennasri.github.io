@@ -1591,7 +1591,7 @@ window.addEventListener('load', function () { styleCell_tinytable_fjkkp7fg8co4ni
 <span class="header-section-number">5.2.2</span> Lasso Regression</h3>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Performing k-fold cross-validation to find optimal lambda value</span></span>
-<span><span class="va">cv_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html">cv.glmnet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span>, <span class="va">rental_days_train</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">cv_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/glmnet/man/cv.glmnet.html">cv.glmnet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span>, <span class="va">rental_days_train</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Optimal lambda value that minimizes MSE</span></span>
 <span><span class="va">best_lambda</span> <span class="op">&lt;-</span> <span class="va">cv_model</span><span class="op">$</span><span class="va">lambda.min</span></span>
@@ -2244,7 +2244,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>Inspired by <a href="https://github.com/spcanelon/silvia">Silvia Canelón</a>.</p>
 </div>
   </div>
-</footer><script type="application/javascript" src="../_themes/light-dark.js"></script><script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
+</footer><script type="application/javascript" src="../_themes/light-dark.js"></script><script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
