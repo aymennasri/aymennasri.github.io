@@ -188,10 +188,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content"><section id="introduction" class="level2"><h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>While customizing my website’s styling, I thought about having light and dark themes for both my website and the plots and I stumbled by <a href="https://mickael.canouil.fr/posts/2023-05-30-quarto-light-dark/">Mickaël Canouil’s post</a> about having this option for ggplot2 plots.</p>
-<p>But I had plotly plots and gt tables which required different treatment in the script as plotly produced SVG files and gt tables were simply tables in HTML but much more complex due to theming.</p>
+<p>While customizing my website’s style, I thought about having light and dark themes for both my posts and the plots included in them, eventually stumbling by <a href="https://mickael.canouil.fr/posts/2023-05-30-quarto-light-dark/">Mickaël Canouil’s post</a> about having this option for ggplot2 plots.</p>
+<p>However, I also had plotly plots and gt tables which required different treatment in the script as plotly produced SVG files and gt tables were simply tables in HTML but much more complex due to their special structure.</p>
 </section><section id="code" class="level2"><h2 class="anchored" data-anchor-id="code">Code</h2>
-<p>As mentioned in Mickaël Canouil’s post, we have to use <code>knitr</code> as the engine to generate the images; the only difference is that I created an alternative <code>knitr</code> handler for the light theme.</p>
+<p>As mentioned in Mickaël Canouil’s post, we have to use <code>knitr</code> as the engine to generate the images; the only difference is that I created an alternative <code>knitr</code> handler for the light theme identical to the dark one.</p>
 <p>Steps to follow :</p>
 <ol type="1">
 <li>Include this code in the YAML header of your Quarto document. (Don’t forget to enable light and dark themes for your page)</li>
@@ -221,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-If you want this for your Quarto website, you should include the page themes options in your _quarto.yml file and add the knitr options to each post where you need the dual plots theme option.
+If you want to apply it to your Quarto website, you should include the page themes options in your _quarto.yml file and add the knitr options to each post where you need the dual plots theme option.
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -309,7 +309,7 @@ For Quarto Websites
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You can store the ggplot2 themes R scripts in a folder and call it in each post by using the source() function.</p>
+<p>You can store the ggplot2 themes R scripts in a folder and call it in each post by using the source() function or even creating a personal package containing what you need.</p>
 </div>
 </div>
 <ol start="3" type="1">
@@ -435,7 +435,7 @@ Javascript code
 </div>
 </div>
 <section id="what-if-you-have-other-figures-not-included-in-the-script" class="level3"><h3 class="anchored" data-anchor-id="what-if-you-have-other-figures-not-included-in-the-script">What if you have other figures not included in the script?</h3>
-<p>A useful tool for my work was the Web Developer Tools on Firefox where I inspected different parts of the rendered HTML file to later include in the script by name, you could use that in order to add more support for different figures.</p>
+<p>A useful tool for my work was the Web Developer Tools on Firefox where I inspected different parts of the rendered HTML file to later include them in the script by name, you could use that in order to add more support for different figures.</p>
 <p>You can visit my Github repo (link under the table of contents) and contact me there if you need something.</p>
 
 
@@ -1016,7 +1016,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>Inspired by <a href="https://github.com/spcanelon/silvia">Silvia Canelón</a>.</p>
 </div>
   </div>
-</footer><script type="application/javascript" src="../_themes/light-dark.js"></script><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false});
+</footer><script type="application/javascript" src="../_themes/light-dark.js"></script><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
