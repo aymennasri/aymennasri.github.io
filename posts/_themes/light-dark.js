@@ -1,5 +1,5 @@
 // Author: Aymen Nasri
-// Version: <1.1.0>
+// Version: <1.2.0>
 // Description: Change plots theme depending on body class (quarto-light or quarto-dark)
 // Originally made by Mickaël Canouil
 // License: MIT
@@ -33,7 +33,7 @@ function updateImageSrc() {
   updateElements('svg[style*="background"]', svg => updateStyle(svg, 'background', 'rgb(255, 241, 229)', 'rgb(34, 34, 34)'));
   updateElements('rect[style*="fill"]', rect => updateStyle(rect, 'fill', 'rgb(255, 241, 229)', 'rgb(34, 34, 34)'));
 
-  // Save the original plotly styling
+  // Save the original plotly styling + ggiraph legend text (cursor)
   updateElements('text[class*="legendtext"], svg text, svg tspan', text => {
     if (!text.dataset.originalStyle) {
       const computedStyle = window.getComputedStyle(text);
@@ -66,8 +66,28 @@ function updateImageSrc() {
       table.style.color = ''; // Reset to default
     }
   });
-
-}
+  
+  // Update ggiraph plot background color
+  updateElements('.ggiraph-svg-bg', svg => {
+    svg.style.fill = 'transparent';
+    svg.style.stroke = 'transparent';
+  });
+  
+  // Update ggiraph xG map background color
+  updateElements('rect[stroke*="#696969"], rect[fill*="#FFFFFF"]', g => {
+    g.style.fill = 'transparent';
+  });
+  
+  updateElements('rect[fill*="#D9D9D9"]', g => {
+    if (isDarkMode){
+      g.style.fill = 'transparent';
+      g.style.stroke = '#D9D9D9';
+    } else {
+      g.style.fill = '#D9D9D9';
+    }
+  });
+  
+};
 
 // Observer making sure all changes are done
 const observer = new MutationObserver(mutations => {
