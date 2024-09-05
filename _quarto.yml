@@ -1,0 +1,40 @@
+project:
+  type: website
+  output-dir: docs
+  resources: CNAME
+  preview:
+    port: 6526
+website:
+  title: "Aymen Nasri"
+  favicon: "images/favicon.png"
+  navbar:
+    pinned: true
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/aymennasri
+      - icon: linkedin
+        href: https://www.linkedin.com/in/aymennasri/
+  page-footer:
+    left: "Made with [Quarto](https://quarto.org/) by Aymen Nasri."
+    right: "Inspired by [Silvia Canelón](https://github.com/spcanelon/silvia)."
+filters: 
+  - include-code-files
+format:
+  html:
+    theme:
+      light:
+        - cosmo
+        - assets/light-theme.scss
+        - assets/light-colors.scss
+      dark:
+        - cosmo
+        - assets/dark-theme.scss
+        - assets/dark-colors.scss
+    code-link: true
+    lightbox: true
+    highlight-style: monokai
+    grid: 
+      body-width: 900px
+    callout-appearance: simple
+include-after-body: assets/analytics.html

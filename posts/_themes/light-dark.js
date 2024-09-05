@@ -86,7 +86,6 @@ function updateImageSrc() {
       g.style.fill = '#D9D9D9';
     }
   });
-  
 };
 
 // Observer making sure all changes are done

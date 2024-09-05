@@ -14,6 +14,7 @@ $web-font-path-2: "https://fonts.googleapis.com/css2?family=Libre+Baskerville:it
     @import url($web-font-path);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 
 $font-family-sans-serif:     "Commissioner";
 $headings-font-family:       "Libre Baskerville";
@@ -70,6 +71,7 @@ details > summary {
 p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) {
   border: 1px solid $accent;
 }
+
 
 // Blockquotes
 .blockquote {

@@ -1,0 +1,9 @@
+.Rproj
+.Rhistory
+.RData
+.Ruserdata
+*.qmd
+_freeze/
+/.quarto/
+.Rproj.user
+.CNAME
