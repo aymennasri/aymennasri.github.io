@@ -242,7 +242,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "An AI & Data Science Engineering Student at EPI Digital School. I have a background working with datasets using analytics to extract useful insights.\nPassionate about R, Statistics and plots, my skill set revolves around working with various well-known R packages (tidyverse, caret, plotly and more), Quarto for reporting and Statistical Experimentation. Currently working on learning Shiny on DataCamp and expanding my knowledge on Statistics."
+    "text": "An AI & Data Science Engineering Student at EPI Digital School who has a background working with datasets using analytical thinking to extract useful insights.\nPassionate about R, statistics and plots, my skill set revolves around working with various well-known R packages (tidyverse, caret, plotly, gt and more), Quarto for reporting and I even made my first R package {ggfootball}!\nCurrently working on expanding my knowledge on Statistics."
   },
   {
     "objectID": "posts/Modeling Car Insurance Claim Outcomes/index.html",
