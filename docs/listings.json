@@ -3,7 +3,6 @@
     "listing": "/index.html",
     "items": [
       "/posts/IMDB Movies Rating Predictor Shiny App/index.html",
-      "/posts/How to use the {targets} package to create a pipeline/index.html",
       "/posts/{ggfootball} is now live!/index.html",
       "/posts/Liverpool vs Ipswich Town Report/index.html",
       "/posts/Quarto Plots Theme Switcher/index.html",
