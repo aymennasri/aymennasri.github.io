@@ -82,4 +82,17 @@ lm_model <- function(data){
   # Calculating MSE
   lm_rmse <- RMSE(rental_days_test, pred)
   lm_mse <- lm_rmse^2
+  metrics <- list(
+    rmse = lm_rmse,
+    mse = lm_mse
+  )
+  
+  return(list(
+    lm_model = lm_model,
+    metrics = metrics,
+    predictions = list(
+      train = train_pred,
+      test = test_pred
+    )
+  ))
 }

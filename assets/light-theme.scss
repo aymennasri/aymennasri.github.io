@@ -39,8 +39,8 @@ $table-caption-color:         $primary;
 
 
 // Inline code
-$code-color:                  $primary-dark;
-$code-bg:                     $accent-light;
+$code-color:                  $accent-light;
+$code-bg:                     $primary-dark;
 
 // Table of contents
 $toc-color:                   $link-color;
@@ -69,7 +69,17 @@ details > summary {
 
 // inline code
 p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) {
-  border: 1px solid $accent;
+  border: 1px solid $secondary;
+}
+
+pre code {
+  color: $primary-dark;
+  font-family: 'JetBrains Mono';
+}
+
+code{
+  color: $accent-light;
+  font-family: 'JetBrains Mono';
 }
 
 

@@ -5,8 +5,8 @@ data|stem|5c9eba8c832c51c9|14c0abc3329ce191|690096bd378015e5|33550471||t20026.79
 data_summary|function|03ab0724f0325b1f|||||||||||||||
 file|stem|f1db1dba8bce729e|e390cde094efdfb5|2c530c1562a7fbd1|1735323524|rental_info.csv|t19948.7470353113s|b9f666b667f81af5|1941287|file|local|vector|||1.879||
 get_data|function|2889c1eed4aa497c|||||||||||||||
-lm_model|function|4972046267056bfb|||||||||||||||
-model|stem|727a19ccc919662e|4a52234c1a6fd9d3|bc95bb72d0e30239|808688450||t20026.7986253304s|a33fb1da66f6e09f|55|rds|local|vector|||0.345||
+lm_model|function|e29ed3bd7623b583|||||||||||||||
+model|stem|727a19ccc919662e|4a52234c1a6fd9d3|2731142864578dfc|808688450||t20026.7986253304s||55|rds|local|vector|||0.224||object train_pred not found
 movies_features|stem|9f8ffbbe54d5d9c3|daaf3b917ad16cb1|5f715142a67f869b|-2044069997||t20026.7986145431s|e38e8b0c4e0ced75|84636|rds|local|vector|||0.012||
 movies_features_plot|function|6189010b556fc183|||||||||||||||
 movies_ratings|stem|85d19749cc510a07|1934e34eacde8f8a|b49af7c2e522ca26|1166523687||t20026.7986213025s|57ffc1874f127b1a|84647|rds|local|vector|||0.005||

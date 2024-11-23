@@ -56,7 +56,9 @@ $gray-700:                    lighten($primary, 60%);
 
 
 // Code
-
+p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) {
+  border: 1px solid $primary-dark;
+}
 
 // code with filename
 .code-with-filename .code-with-filename-file {
@@ -72,6 +74,11 @@ $gray-700:                    lighten($primary, 60%);
 // code output
 pre code {
   color: $primary;
+  font-family: 'JetBrains Mono';
+}
+
+code{
+  font-family: 'JetBrains Mono';
 }
 
 // Blockquotes
