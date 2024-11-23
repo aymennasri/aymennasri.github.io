@@ -146,7 +146,7 @@ code{
 // posts
 .quarto-category {
   background-color: $primary-dark;
-  color: white;
+  color: $accent-light;
   border-color: $primary;
   &:hover {
     background-color: white;
@@ -160,7 +160,7 @@ code{
   border-color: $secondary !important;
   &:hover {
   background-color: $secondary;
-  color: $secondary !important;
+  color: $accent-light !important;
   }
 }
 
