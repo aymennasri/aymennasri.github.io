@@ -50,7 +50,9 @@ function updateImageSrc() {
         textDecoration: computedStyle.textDecoration
       });
     }
-
+    
+    // Handling the legend text that stays black\white even when hidden
+    
     if (text.closest('.highcharts-legend-item')) {
       const legendItem = text.closest('.highcharts-legend-item');
       if (legendItem.classList.contains('highcharts-legend-item-hidden')) {
