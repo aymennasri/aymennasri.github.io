@@ -54,6 +54,13 @@ $gray-700:                    lighten($primary, 60%);
 
 /*-- scss:rules --*/
 
+// copy button popup text color
+
+.code-copy-button {
+  &[aria-label="Copied!"] {
+    color: #ffffff !important;
+  }
+}
 
 // Code
 p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) {
@@ -75,6 +82,7 @@ p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) {
 pre code {
   color: $primary;
   font-family: 'JetBrains Mono';
+  font-size: 16px;
 }
 
 code{
