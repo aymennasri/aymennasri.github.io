@@ -35,6 +35,10 @@ function updateImageSrc() {
 
   // Save the original plotly styling + ggiraph legend text (cursor)
   updateElements('text[class*="legendtext"], svg text, svg tspan', text => {
+    
+    // Skip processing if the element is a Highcharts tooltip
+    if (text.closest('.highcharts-tooltip')) return;
+    
     if (!text.dataset.originalStyle) {
       const computedStyle = window.getComputedStyle(text);
       text.dataset.originalStyle = JSON.stringify({
@@ -45,6 +49,20 @@ function updateImageSrc() {
         fontFamily: computedStyle.fontFamily,
         textDecoration: computedStyle.textDecoration
       });
+    }
+    
+    // Handling the legend text that stays black\white even when hidden
+    
+    if (text.closest('.highcharts-legend-item')) {
+      const legendItem = text.closest('.highcharts-legend-item');
+      if (legendItem.classList.contains('highcharts-legend-item-hidden')) {
+        // Lighter color for hidden items
+        text.style.fill = isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)';
+      } else {
+        // Normal color for visible items
+        text.style.fill = isDarkMode ? 'white' : 'black';
+      }
+      return;
     }
 
     const originalStyle = JSON.parse(text.dataset.originalStyle);
@@ -100,7 +118,8 @@ const observer = new MutationObserver(mutations => {
 observer.observe(document.body, {
   attributes: true,
   childList: true,
-  subtree: true
+  subtree: true,
+  attributeFilter: ['class']
 });
 
 // Run on page load and immediately
