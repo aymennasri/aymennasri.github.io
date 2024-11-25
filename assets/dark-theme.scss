@@ -69,11 +69,11 @@ p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) {
 // code with filename
 .code-with-filename .code-with-filename-file {
   color: $code-color;
-  background-color: $code-bg !important; // $code-bg
-  border: 1px solid $code-block-border;
+  background-color: $body-secondary !important; // $code-bg
+  border: 1px solid $body-secondary;
   border-bottom: none;
   pre {
-    background-color: $code-bg !important;
+    background-color: $body-secondary !important;
   }
 }
 
@@ -86,6 +86,11 @@ pre code {
 
 code{
   font-family: 'JetBrains Mono';
+}
+
+.cell-output {
+  background-color: $body-bg;
+  border-radius: 4px;
 }
 
 // Blockquotes
