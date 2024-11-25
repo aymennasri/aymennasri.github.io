@@ -18,8 +18,8 @@ website:
   page-footer:
     left: "Made with [Quarto](https://quarto.org/) by Aymen Nasri."
     right: "Inspired by [Silvia Canelón](https://github.com/spcanelon/silvia)."
-filters: 
-  - include-code-files
+filters:
+   - include-code-files
 format:
   html:
     theme:
@@ -35,6 +35,6 @@ format:
     lightbox: true
     highlight-style: monokai
     grid: 
-      body-width: 900px
+      body-width: 1000px
     callout-appearance: simple
 include-after-body: assets/analytics.html
