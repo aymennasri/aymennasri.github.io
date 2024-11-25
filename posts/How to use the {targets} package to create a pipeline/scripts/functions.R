@@ -87,12 +87,6 @@ lm_model <- function(data){
     mse = lm_mse
   )
   
-  return(list(
-    lm_model = lm_model,
-    metrics = metrics,
-    predictions = list(
-      train = train_pred,
-      test = test_pred
-    )
-  ))
+  return(lm_model)
 }
+

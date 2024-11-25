@@ -70,7 +70,7 @@ function updateImageSrc() {
     // Modify the text colors for plotly labels
     if (isDarkMode) {
       text.style.fill = 'white';
-      text.style.color = 'white';
+      text.style.color = 'rgb(204,193,183)';
     } else {
       Object.assign(text.style, originalStyle);
     }
@@ -104,7 +104,15 @@ function updateImageSrc() {
       g.style.fill = '#D9D9D9';
     }
   });
+
+  // Update visNetwork background color
+  updateElements('.vis-network', div => {
+    updateStyle(div, 'background', 'none', 'cornsilk');
+  });
+
 };
+
+
 
 // Observer making sure all changes are done
 const observer = new MutationObserver(mutations => {

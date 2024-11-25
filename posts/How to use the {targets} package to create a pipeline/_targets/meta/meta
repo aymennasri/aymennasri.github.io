@@ -1,16 +1,16 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-corr|stem|35f98047b2068464|ded54a7056d81776|c4922e947b37fca9|-795226184||t20026.7986198673s|3d624311e1bfb780|4388|rds|local|vector|||0.454||
+corr|stem|3bb3f41819fec7ae|ded54a7056d81776|6bb4ee52ba496a7a|-795226184||t20052.8056556391s|691c9928e6a8a6a2|4387|rds|local|vector|||0.76||
 corr_table|function|f782bb4e2bf041ee|||||||||||||||
-data|stem|5c9eba8c832c51c9|14c0abc3329ce191|690096bd378015e5|33550471||t20026.7986121356s|17c6334ca843e899|82180|rds|local|vector|||0.218||
+data|stem|9e64b4094d7daf38|14c0abc3329ce191|690096bd378015e5|33550471||t20052.8056429999s|17c6334ca843e899|82180|rds|local|vector|||0.484||
 data_summary|function|03ab0724f0325b1f|||||||||||||||
-file|stem|f1db1dba8bce729e|e390cde094efdfb5|2c530c1562a7fbd1|1735323524|rental_info.csv|t19948.7470353113s|b9f666b667f81af5|1941287|file|local|vector|||1.879||
+file|stem|f1db1dba8bce729e|e390cde094efdfb5|2c530c1562a7fbd1|1735323524|rental_info.csv|t19948.7470353113s|b9f666b667f81af5|1941287|file|local|vector|||3.489||
 get_data|function|2889c1eed4aa497c|||||||||||||||
-lm_model|function|e29ed3bd7623b583|||||||||||||||
-model|stem|727a19ccc919662e|4a52234c1a6fd9d3|2731142864578dfc|808688450||t20026.7986253304s||55|rds|local|vector|||0.224||object train_pred not found
-movies_features|stem|9f8ffbbe54d5d9c3|daaf3b917ad16cb1|5f715142a67f869b|-2044069997||t20026.7986145431s|e38e8b0c4e0ced75|84636|rds|local|vector|||0.012||
-movies_features_plot|function|6189010b556fc183|||||||||||||||
-movies_ratings|stem|85d19749cc510a07|1934e34eacde8f8a|b49af7c2e522ca26|1166523687||t20026.7986213025s|57ffc1874f127b1a|84647|rds|local|vector|||0.005||
+lm_model|function|a8a7cbae7492700b|||||||||||||||
+model|stem|b63140eb9498affc|4a52234c1a6fd9d3|6efe4cf50b5a8856|808688450||t20052.8056728616s|7af973560484704e|3865850|rds|local|vector|||0.564||
+movies_features|stem|8d8bddb596be5dd5|daaf3b917ad16cb1|a9f8e68ba17c5936|-2044069997||t20052.8058121233s|04fb012995bfe290|84690|rds|local|vector|||0.038||
+movies_features_plot|function|5891f8e5e9660c9d|||||||||||||||
+movies_ratings|stem|067754d85d0193eb|1934e34eacde8f8a|d5b11ec2b2e48a75|1166523687||t20052.8056578613s|2322f5d9d40a014a|84650|rds|local|vector|||0.016||
 movies_ratings_plot|function|3fca4ec8844ac14e|||||||||||||||
-movies_release_years|stem|f7763382aac9cba0|f61b87c3aa30e163|317b9330e4dbf877|59372160||t20026.7986208858s|ebab1626d1447839|186960|rds|local|vector|||0.015||
+movies_release_years|stem|268a913799e884eb|f61b87c3aa30e163|d9c3b1eceb23fa34|59372160||t20052.8056571206s|76c9478df0582c27|187214|rds|local|vector|||0.019||
 movies_release_years_plot|function|df70561e2457c0dc|||||||||||||||
-summary|stem|515d543422a6da8f|6d4e8d16d3d775d6|afe7a0c7ecb558e1|-1884548258||t20026.7986139875s|b972f22e4ce7b233|338929|rds|local|vector|||0.071||
+summary|stem|8c715c6f45b3986d|6d4e8d16d3d775d6|d78c7c5cdf15f81a|-1884548258||t20052.8056459167s|e7844564d6f92d3e|338928|rds|local|vector|||0.115||
