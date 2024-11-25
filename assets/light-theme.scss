@@ -69,7 +69,6 @@ $gray-200:                    lighten($primary, 60%);
   --bs-tooltip-bg: #000;
 }
 
-
 details > summary {
   color: $body-secondary;
 }
@@ -91,6 +90,10 @@ code{
   font-family: 'JetBrains Mono';
 }
 
+.cell-output {
+  background-color: $primary;
+  border-radius: 4px;
+}
 
 // Blockquotes
 .blockquote {
