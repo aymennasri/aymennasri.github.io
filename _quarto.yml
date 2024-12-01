@@ -35,6 +35,6 @@ format:
     lightbox: true
     highlight-style: monokai
     grid: 
-      body-width: 1000px
+      body-width: 900px
     callout-appearance: simple
 include-after-body: assets/analytics.html
