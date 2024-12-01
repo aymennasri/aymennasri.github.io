@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/DataAnalysisProject/index.html",
       "/posts/How to use the {targets} package to create a pipeline/index.html",
       "/posts/IMDB Movies Rating Predictor Shiny App/index.html",
       "/posts/{ggfootball} is now live!/index.html",
