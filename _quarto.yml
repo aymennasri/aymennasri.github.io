@@ -6,7 +6,7 @@ project:
     port: 6526
 website:
   title: "Aymen Nasri"
-  favicon: "images/favicon.png"
+  favicon: "images/logo.png"
   navbar:
     pinned: true
     right:
