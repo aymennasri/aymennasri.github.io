@@ -1,6 +1,6 @@
 // Author: Aymen Nasri
-// Version: <1.2.0>
-// Description: Change plots theme depending on body class (quarto-light or quarto-dark)
+// Version: <1.3.0>
+// Description: Change plots/tables theme depending on body class (quarto-light or quarto-dark)
 // Originally made by Mickaël Canouil
 // License: MIT
 
@@ -142,7 +142,81 @@ function updateImageSrc() {
         input.style.borderColor = "";
       }
     });
-
+    
+    // Update all pagination buttons for hover/active states
+    updateElements(".rt-pagination button", (button) => {
+      if (isDarkMode) {
+        // Store original background to reset to
+        const originalBg = "";
+        
+        // Add hover effect via CSS
+        button.style.transition = "background-color 0.2s";
+        
+        // Function to reset backgrounds on all pagination buttons
+        const resetAllButtons = () => {
+          document.querySelectorAll('.rt-pagination button').forEach(btn => {
+            if (!btn.classList.contains('rt-page-button-current')) {
+              btn.style.backgroundColor = originalBg;
+            }
+          });
+        };
+        
+        // Add click handler to reset all buttons first
+        button.addEventListener('click', () => {
+          // Small timeout to let reactable update the current button class
+          setTimeout(resetAllButtons, 50);
+        });
+        
+        // Hover effects
+        button.addEventListener('mouseenter', () => {
+          if (!button.classList.contains('rt-page-button-current')) {
+            button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+          }
+        });
+        
+        button.addEventListener('mouseleave', () => {
+          if (!button.classList.contains('rt-page-button-current')) {
+            button.style.backgroundColor = originalBg;
+          }
+        });
+      }
+    });
+    
+    // Update all pagination buttons for hover/active states
+    updateElements(".rt-pagination button", (button) => {
+      if (isDarkMode) {
+        // Add hover effect via CSS
+        button.style.transition = "background-color 0.2s";
+        
+        // Add event listeners for hover/click states
+        button.addEventListener('mouseenter', () => {
+          if (!button.classList.contains('rt-page-button-current')) {
+            button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+          }
+        });
+        
+        button.addEventListener('mouseleave', () => {
+          if (!button.classList.contains('rt-page-button-current')) {
+            button.style.backgroundColor = "";
+          }
+        });
+        
+        // Style for active (clicked) state
+        button.addEventListener('mousedown', () => {
+          button.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+        });
+        
+        button.addEventListener('mouseup', () => {
+          if (!button.classList.contains('rt-page-button-current')) {
+            button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+          }
+        });
+      } else {
+        // Remove event listeners in light mode
+        button.style.transition = "";
+      }
+    });
+      
     // Update pagination buttons
     updateElements(".rt-pagination-nav button", (button) => {
       if (isDarkMode) {
