@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.43">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="dcterms.date" content="2024-08-14">
+<meta name="description" content="Writing a Javascript file to have light/dark themed plots (ggplot2 and plotly) and tables (gt and reactable) depending on your Quarto document theme.">
+<title>Quarto Plots/Tables Theme Switcher – Aymen Nasri</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c9f0887447d3a639491f60c4af03832d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c9f0887447d3a639491f60c4af03832d.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ee36f1c1c01669d575ce0a41029bc5c8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-758f53157e34fc22dd82841da0a5f835.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="../../site_libs/plotly-binding-4.10.4/plotly.js"></script><script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script><script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script><link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="../../site_libs/core-js-2.5.3/shim.min.js"></script><script src="../../site_libs/react-18.2.0/react.min.js"></script><script src="../../site_libs/react-18.2.0/react-dom.min.js"></script><script src="../../site_libs/reactwidget-2.0.0/react-tools.js"></script><link href="../../site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+<script src="../../site_libs/reactable-binding-0.4.4/reactable.js"></script>
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Aymen Nasri</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aymennasri"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/aymennasri/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Quarto Plots/Tables Theme Switcher</h1>
+                  <div>
+        <div class="description">
+          Writing a Javascript file to have light/dark themed plots (ggplot2 and plotly) and tables (gt and reactable) depending on your Quarto document theme.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Tutorial</div>
+                <div class="quarto-category">Quarto</div>
+                <div class="quarto-category">Javascript</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 14, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li>
+<a href="#expected-results" id="toc-expected-results" class="nav-link" data-scroll-target="#expected-results">Expected Results</a>
+  <ul class="collapse">
+<li><a href="#ggplot2-plots" id="toc-ggplot2-plots" class="nav-link" data-scroll-target="#ggplot2-plots">{ggplot2} Plots</a></li>
+  <li><a href="#plotly-plots" id="toc-plotly-plots" class="nav-link" data-scroll-target="#plotly-plots">{plotly} Plots</a></li>
+  <li><a href="#gt-tables" id="toc-gt-tables" class="nav-link" data-scroll-target="#gt-tables">{gt} Tables</a></li>
+  <li><a href="#reactable-tables" id="toc-reactable-tables" class="nav-link" data-scroll-target="#reactable-tables">{reactable} Tables</a></li>
+  <li><a href="#what-if-you-have-other-figures-not-included-in-the-script" id="toc-what-if-you-have-other-figures-not-included-in-the-script" class="nav-link" data-scroll-target="#what-if-you-have-other-figures-not-included-in-the-script">What if you have other figures not included in the script?</a></li>
+  </ul>
+</li>
+  </ul><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/aymennasri/QuartoPlotsThemeSwitcher"><i class="bi bi-github"></i>Javascript Code</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><section id="introduction" class="level2"><h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>While customizing my website’s style, I thought about having light and dark themes for both my posts and the plots included in them, eventually stumbling by <a href="https://mickael.canouil.fr/posts/2023-05-30-quarto-light-dark/">Mickaël Canouil’s post</a> about having this option for ggplot2 plots.</p>
+<p>However, I also had plotly plots and gt/reactable tables which required different treatment in the script as plotly produced SVG files and gt/reactable tables were simply tables in HTML but much more complex due to their special structure.</p>
+</section><section id="code" class="level2"><h2 class="anchored" data-anchor-id="code">Code</h2>
+<p>As mentioned in Mickaël Canouil’s post, we have to use <code>knitr</code> as the engine to generate the images; the only difference is that I created an alternative <code>knitr</code> handler for the light theme identical to the dark one.</p>
+<p>Steps to follow :</p>
+<ol type="1">
+<li>Include this code in the YAML header of your Quarto document. (Don’t forget to enable light and dark themes for your page)</li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">knitr Options</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Light/Dark Themes</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="sourceCode" id="cb1"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">knitr</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">opts_chunk</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">dev</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">lightsvglite</span><span class="kw">,</span><span class="at"> darksvglite</span><span class="kw">]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fig.ext</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">.light.svg</span><span class="kw">,</span><span class="at"> .dark.svg</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="sourceCode" id="cb2"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">light</span><span class="kw">:</span><span class="at"> flatly</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">dark</span><span class="kw">:</span><span class="at"> darkly</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+If you want to apply it to your Quarto website, you should include the page themes options in your _quarto.yml file and add the knitr options to each post where you need the dual plots theme option.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<ol start="2" type="1">
+<li>Add your ggplot2 themes and customize it to your likening.</li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Light Theme</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Dark Theme</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">light_theme</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu">theme_solarized_2</span><span class="op">(</span><span class="op">)</span> <span class="op">%+%</span> </span>
+<span>    <span class="fu">theme</span><span class="op">(</span></span>
+<span>      plot.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#FFF1E5"</span><span class="op">)</span>,</span>
+<span>      panel.border <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      axis.line <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#586e75"</span>,</span>
+<span>                               linetype <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>      axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#586e75"</span><span class="op">)</span>,</span>
+<span>      axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#002b36"</span><span class="op">)</span>,</span>
+<span>      legend.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#FFF1E5"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span> </span>
+<span></span>
+<span><span class="fu">theme_set</span><span class="op">(</span><span class="fu">light_theme</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">lightsvglite</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span>, <span class="va">width</span>, <span class="va">height</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu">reset_theme_settings</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">theme_set</span><span class="op">(</span><span class="fu">light_theme</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">ggsave</span><span class="op">(</span></span>
+<span>    filename <span class="op">=</span> <span class="va">file</span>,</span>
+<span>    width <span class="op">=</span> <span class="va">width</span>,</span>
+<span>    height <span class="op">=</span> <span class="va">height</span>,</span>
+<span>    dev <span class="op">=</span> <span class="st">"svg"</span>,</span>
+<span>    bg <span class="op">=</span> <span class="st">"transparent"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">theme_dark</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu">theme_solarized_2</span><span class="op">(</span>light <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%+%</span></span>
+<span>    <span class="fu">theme</span><span class="op">(</span></span>
+<span>      text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      legend.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      legend.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      strip.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      rect <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#272b30"</span>, fill <span class="op">=</span> <span class="st">"#272b30"</span><span class="op">)</span>,</span>
+<span>      plot.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#222222"</span>, colour <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>      axis.line <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      plot.subtitle <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      plot.caption <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>      legend.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#222222"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">darksvglite</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span>, <span class="va">width</span>, <span class="va">height</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu">reset_theme_settings</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_dark</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">ggsave</span><span class="op">(</span></span>
+<span>    filename <span class="op">=</span> <span class="va">file</span>,</span>
+<span>    width <span class="op">=</span> <span class="va">width</span>,</span>
+<span>    height <span class="op">=</span> <span class="va">height</span>,</span>
+<span>    dev <span class="op">=</span> <span class="st">"svg"</span>,</span>
+<span>    bg <span class="op">=</span> <span class="st">"transparent"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+For Quarto Websites
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can store the ggplot2 themes R scripts in a folder and call it in each post by using the source() function or even creating a personal package containing what you need.</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Finally add this to your YAML header to include the Javascript code in your Quarto document and you’re good to go!</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include-after-body</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">  text</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    &lt;script type="application/javascript" src="light-dark.js"&gt;&lt;/script&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>
+Javascript code
+</summary><div class="sourceCode" id="cb6"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Author: Aymen Nasri</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Version: &lt;1.2.0&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Description: Change plots theme depending on body class (quarto-light or quarto-dark)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Originally made by Mickaël Canouil</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">// License: MIT</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">updateImageSrc</span>() {</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Identifying which theme is on</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> isLightMode <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">"quarto-light"</span>)<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> isDarkMode <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">"quarto-dark"</span>)<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>isLightMode <span class="op">&amp;&amp;</span> <span class="op">!</span>isDarkMode) <span class="cf">return</span><span class="op">;</span> <span class="co">// Exit if neither mode is active</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Function to update styles</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> updateElements <span class="op">=</span> (selector<span class="op">,</span> updateFunc) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="fu">querySelectorAll</span>(selector)<span class="op">.</span><span class="fu">forEach</span>(updateFunc)<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Function to replace the plots depending on theme</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateElements</span>(<span class="st">"img"</span><span class="op">,</span> (img) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> newSrc <span class="op">=</span> img<span class="op">.</span><span class="at">src</span><span class="op">.</span><span class="fu">replace</span>(</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      isLightMode <span class="op">?</span> <span class="st">".dark"</span> <span class="op">:</span> <span class="st">".light"</span><span class="op">,</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      isDarkMode <span class="op">?</span> <span class="st">".dark"</span> <span class="op">:</span> <span class="st">".light"</span><span class="op">,</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (newSrc <span class="op">!==</span> img<span class="op">.</span><span class="at">src</span>) img<span class="op">.</span><span class="at">src</span> <span class="op">=</span> newSrc<span class="op">;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Update ggplot</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> updateStyle <span class="op">=</span> (elem<span class="op">,</span> prop<span class="op">,</span> lightValue<span class="op">,</span> darkValue) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> currentValue <span class="op">=</span> elem<span class="op">.</span><span class="at">style</span>[prop]<span class="op">;</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> newValue <span class="op">=</span> isDarkMode <span class="op">?</span> darkValue <span class="op">:</span> lightValue<span class="op">;</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (currentValue <span class="op">!==</span> newValue) elem<span class="op">.</span><span class="at">style</span>[prop] <span class="op">=</span> newValue<span class="op">;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Update ploly background color for both the plot and the legend box</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateElements</span>(<span class="st">'svg[style*="background"]'</span><span class="op">,</span> (svg) <span class="kw">=&gt;</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateStyle</span>(svg<span class="op">,</span> <span class="st">"background"</span><span class="op">,</span> <span class="st">"rgb(255, 241, 229)"</span><span class="op">,</span> <span class="st">"rgb(34, 34, 34)"</span>)<span class="op">,</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateElements</span>(<span class="st">'rect[style*="fill"]'</span><span class="op">,</span> (rect) <span class="kw">=&gt;</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateStyle</span>(rect<span class="op">,</span> <span class="st">"fill"</span><span class="op">,</span> <span class="st">"rgb(255, 241, 229)"</span><span class="op">,</span> <span class="st">"rgb(34, 34, 34)"</span>)<span class="op">,</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Save the original plotly styling</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateElements</span>(<span class="st">'text[class*="legendtext"], svg text, svg tspan'</span><span class="op">,</span> (text) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>text<span class="op">.</span><span class="at">dataset</span><span class="op">.</span><span class="at">originalStyle</span>) {</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> computedStyle <span class="op">=</span> <span class="bu">window</span><span class="op">.</span><span class="fu">getComputedStyle</span>(text)<span class="op">;</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>      text<span class="op">.</span><span class="at">dataset</span><span class="op">.</span><span class="at">originalStyle</span> <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fill</span><span class="op">:</span> computedStyle<span class="op">.</span><span class="at">fill</span><span class="op">,</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>        <span class="dt">color</span><span class="op">:</span> computedStyle<span class="op">.</span><span class="at">color</span><span class="op">,</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fontSize</span><span class="op">:</span> computedStyle<span class="op">.</span><span class="at">fontSize</span><span class="op">,</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fontWeight</span><span class="op">:</span> computedStyle<span class="op">.</span><span class="at">fontWeight</span><span class="op">,</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fontFamily</span><span class="op">:</span> computedStyle<span class="op">.</span><span class="at">fontFamily</span><span class="op">,</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>        <span class="dt">textDecoration</span><span class="op">:</span> computedStyle<span class="op">.</span><span class="at">textDecoration</span><span class="op">,</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> originalStyle <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(text<span class="op">.</span><span class="at">dataset</span><span class="op">.</span><span class="at">originalStyle</span>)<span class="op">;</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Modify the text colors for plotly labels</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (isDarkMode) {</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>      text<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">fill</span> <span class="op">=</span> <span class="st">"white"</span><span class="op">;</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>      text<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">"rgb(204,193,183)"</span><span class="op">;</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>      <span class="bu">Object</span><span class="op">.</span><span class="fu">assign</span>(text<span class="op">.</span><span class="at">style</span><span class="op">,</span> originalStyle)<span class="op">;</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Update table text color</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateElements</span>(</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">".gt_table_body, .gt_heading, .gt_sourcenotes, .gt_footnotes"</span><span class="op">,</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    (table) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (isDarkMode) {</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>        table<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">"white"</span><span class="op">;</span> <span class="co">// Set text color to a light shade</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>        table<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span> <span class="co">// Reset to default</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateElements</span>(<span class="st">".reactable"</span><span class="op">,</span> (table) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Update text colors in reactable table</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateElements</span>(</span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>      <span class="st">".rt-tbody .rt-tr, .rt-thead .rt-tr, .rt-pagination"</span><span class="op">,</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>      (elem) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>        <span class="fu">updateStyle</span>(elem<span class="op">,</span> <span class="st">"color"</span><span class="op">,</span> <span class="st">""</span><span class="op">,</span> isDarkMode <span class="op">?</span> <span class="st">"white"</span> <span class="op">:</span> <span class="st">""</span>)<span class="op">;</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Update background color for the search input</span></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateElements</span>(<span class="st">".rt-search"</span><span class="op">,</span> (input) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (isDarkMode) {</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>        input<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">"rgb(50, 50, 50)"</span><span class="op">;</span></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>        input<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">"white"</span><span class="op">;</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>        input<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">borderColor</span> <span class="op">=</span> <span class="st">"rgba(255, 255, 255, 0.2)"</span><span class="op">;</span></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>        input<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>        input<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>        input<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">borderColor</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Update all pagination buttons for hover/active states</span></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateElements</span>(<span class="st">".rt-pagination button"</span><span class="op">,</span> (button) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (isDarkMode) {</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Store original background to reset to</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> originalBg <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Add hover effect via CSS</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">transition</span> <span class="op">=</span> <span class="st">"background-color 0.2s"</span><span class="op">;</span></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Function to reset backgrounds on all pagination buttons</span></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> resetAllButtons <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>          <span class="bu">document</span><span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">'.rt-pagination button'</span>)<span class="op">.</span><span class="fu">forEach</span>(btn <span class="kw">=&gt;</span> {</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="op">!</span>btn<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">'rt-page-button-current'</span>)) {</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>              btn<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> originalBg<span class="op">;</span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>          })<span class="op">;</span></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>        }<span class="op">;</span></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Add click handler to reset all buttons first</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'click'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>          <span class="co">// Small timeout to let reactable update the current button class</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>          <span class="pp">setTimeout</span>(resetAllButtons<span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Hover effects</span></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'mouseenter'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (<span class="op">!</span>button<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">'rt-page-button-current'</span>)) {</span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>            button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">"rgba(255, 255, 255, 0.1)"</span><span class="op">;</span></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>          }</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'mouseleave'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (<span class="op">!</span>button<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">'rt-page-button-current'</span>)) {</span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>            button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> originalBg<span class="op">;</span></span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>          }</span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Update all pagination buttons for hover/active states</span></span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateElements</span>(<span class="st">".rt-pagination button"</span><span class="op">,</span> (button) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (isDarkMode) {</span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Add hover effect via CSS</span></span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">transition</span> <span class="op">=</span> <span class="st">"background-color 0.2s"</span><span class="op">;</span></span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Add event listeners for hover/click states</span></span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'mouseenter'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (<span class="op">!</span>button<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">'rt-page-button-current'</span>)) {</span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>            button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">"rgba(255, 255, 255, 0.1)"</span><span class="op">;</span></span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a>          }</span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'mouseleave'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (<span class="op">!</span>button<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">'rt-page-button-current'</span>)) {</span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>            button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a>          }</span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Style for active (clicked) state</span></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'mousedown'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>          button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">"rgba(255, 255, 255, 0.2)"</span><span class="op">;</span></span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'mouseup'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (<span class="op">!</span>button<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">'rt-page-button-current'</span>)) {</span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>            button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">"rgba(255, 255, 255, 0.1)"</span><span class="op">;</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a>          }</span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Remove event listeners in light mode</span></span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">transition</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Update pagination buttons</span></span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateElements</span>(<span class="st">".rt-pagination-nav button"</span><span class="op">,</span> (button) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (isDarkMode) {</span>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">"rgba(255, 255, 255, 0.7)"</span><span class="op">;</span></span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a>    <span class="co">// For current page button</span></span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateElements</span>(<span class="st">".rt-page-button-current"</span><span class="op">,</span> (button) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (isDarkMode) {</span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">"rgba(255, 255, 255, 0.2)"</span><span class="op">;</span></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">"white"</span><span class="op">;</span></span>
+<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a>        button<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Header sort indicators should be visible in dark mode</span></span>
+<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateElements</span>(<span class="st">".rt-sort-header"</span><span class="op">,</span> (header) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (isDarkMode) {</span>
+<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a>        header<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">"white"</span><span class="op">;</span></span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a>        header<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">color</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a><span class="co">// Observer making sure all changes are done</span></span>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> observer <span class="op">=</span> <span class="kw">new</span> <span class="bu">MutationObserver</span>((mutations) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (</span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a>    mutations<span class="op">.</span><span class="fu">some</span>(</span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a>      (mutation) <span class="kw">=&gt;</span></span>
+<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a>        (mutation<span class="op">.</span><span class="at">type</span> <span class="op">===</span> <span class="st">"attributes"</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a>          mutation<span class="op">.</span><span class="at">attributeName</span> <span class="op">===</span> <span class="st">"class"</span>) <span class="op">||</span></span>
+<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a>        (mutation<span class="op">.</span><span class="at">type</span> <span class="op">===</span> <span class="st">"childList"</span> <span class="op">&amp;&amp;</span> mutation<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">tagName</span> <span class="op">===</span> <span class="st">"svg"</span>)<span class="op">,</span></span>
+<span id="cb6-216"><a href="#cb6-216" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-217"><a href="#cb6-217" aria-hidden="true" tabindex="-1"></a>  ) {</span>
+<span id="cb6-218"><a href="#cb6-218" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateImageSrc</span>()<span class="op">;</span></span>
+<span id="cb6-219"><a href="#cb6-219" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-220"><a href="#cb6-220" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb6-221"><a href="#cb6-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-222"><a href="#cb6-222" aria-hidden="true" tabindex="-1"></a>observer<span class="op">.</span><span class="fu">observe</span>(<span class="bu">document</span><span class="op">.</span><span class="at">body</span><span class="op">,</span> {</span>
+<span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a>  <span class="dt">attributes</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb6-224"><a href="#cb6-224" aria-hidden="true" tabindex="-1"></a>  <span class="dt">childList</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb6-225"><a href="#cb6-225" aria-hidden="true" tabindex="-1"></a>  <span class="dt">subtree</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb6-226"><a href="#cb6-226" aria-hidden="true" tabindex="-1"></a>  <span class="dt">attributeFilter</span><span class="op">:</span> [<span class="st">"class"</span>]<span class="op">,</span></span>
+<span id="cb6-227"><a href="#cb6-227" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb6-228"><a href="#cb6-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-229"><a href="#cb6-229" aria-hidden="true" tabindex="-1"></a><span class="co">// Run on page load and immediately</span></span>
+<span id="cb6-230"><a href="#cb6-230" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"DOMContentLoaded"</span><span class="op">,</span> updateImageSrc)<span class="op">;</span></span>
+<span id="cb6-231"><a href="#cb6-231" aria-hidden="true" tabindex="-1"></a><span class="fu">updateImageSrc</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details></section><section id="expected-results" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="expected-results">Expected Results</h2>
+<section id="ggplot2-plots" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="ggplot2-plots">{ggplot2} Plots</h3>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2" style="text-align:center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="assets/light.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Light mode ON"><img src="assets/light.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Scatter plot on a light background with light mode switched on."></a></p>
+</figure>
+</div>
+<figcaption>Light mode <strong>ON</strong></figcaption></figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="assets/dark.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Dark mode ON"><img src="assets/dark.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Scatter plot on a dark background with dark mode switched on."></a></p>
+</figure>
+</div>
+<figcaption>Dark mode <strong>ON</strong></figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Switch the light/dark mode from the navbar to see the results.</span></div></div>
+</section><section id="plotly-plots" class="level3"><h3 class="anchored" data-anchor-id="plotly-plots">{plotly} Plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-e75f45ea85b030073d53" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e75f45ea85b030073d53">{"x":{"visdat":{"1a915224bae7a":["function () ","plotlyVisDat"]},"cur_data":"1a915224bae7a","attrs":{"1a915224bae7a":{"labels":{},"values":{},"marker":{"colors":["#636EFA","#EF553B","#00CC96"]},"textinfo":"label+percent","hoverinfo":"text","text":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Distribution of Penguin Species in Palmer Penguins Dataset","showlegend":true,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["Adelie","Gentoo","Chinstrap"],"values":[152,124,68],"marker":{"color":"rgba(31,119,180,1)","colors":["#636EFA","#EF553B","#00CC96"],"line":{"color":"rgba(255,255,255,1)"}},"textinfo":"label+percent","hoverinfo":["text","text","text"],"text":["Adelie :  152  penguins","Gentoo :  124  penguins","Chinstrap :  68  penguins"],"type":"pie","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section><section id="gt-tables" class="level3"><h3 class="anchored" data-anchor-id="gt-tables">{gt} Tables</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="lwzhtixwlo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#lwzhtixwlo table {
+  font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#lwzhtixwlo thead, #lwzhtixwlo tbody, #lwzhtixwlo tfoot, #lwzhtixwlo tr, #lwzhtixwlo td, #lwzhtixwlo th {
+  border-style: none;
+}
+
+#lwzhtixwlo p {
+  margin: 0;
+  padding: 0;
+}
+
+#lwzhtixwlo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: rgba(255, 255, 255, 0);
+  width: auto;
+  border-top-style: hidden;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: hidden;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#lwzhtixwlo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: rgba(255, 255, 255, 0);
+  border-bottom-width: 0;
+}
+
+#lwzhtixwlo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: rgba(255, 255, 255, 0);
+  border-top-width: 0;
+}
+
+#lwzhtixwlo .gt_heading {
+  background-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  border-bottom-color: rgba(255, 255, 255, 0);
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_col_heading {
+  color: #333333;
+  background-color: #F0F0F0;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lwzhtixwlo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #F0F0F0;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lwzhtixwlo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lwzhtixwlo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lwzhtixwlo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lwzhtixwlo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#lwzhtixwlo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#lwzhtixwlo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lwzhtixwlo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lwzhtixwlo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lwzhtixwlo .gt_row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lwzhtixwlo .gt_stub {
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lwzhtixwlo .gt_stub_row_group {
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lwzhtixwlo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lwzhtixwlo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#lwzhtixwlo .gt_summary_row {
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0);
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lwzhtixwlo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lwzhtixwlo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_grand_summary_row {
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0);
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lwzhtixwlo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lwzhtixwlo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_footnotes {
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0);
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lwzhtixwlo .gt_sourcenotes {
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0);
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lwzhtixwlo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lwzhtixwlo .gt_left {
+  text-align: left;
+}
+
+#lwzhtixwlo .gt_center {
+  text-align: center;
+}
+
+#lwzhtixwlo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lwzhtixwlo .gt_font_normal {
+  font-weight: normal;
+}
+
+#lwzhtixwlo .gt_font_bold {
+  font-weight: bold;
+}
+
+#lwzhtixwlo .gt_font_italic {
+  font-style: italic;
+}
+
+#lwzhtixwlo .gt_super {
+  font-size: 65%;
+}
+
+#lwzhtixwlo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#lwzhtixwlo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lwzhtixwlo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#lwzhtixwlo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#lwzhtixwlo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lwzhtixwlo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lwzhtixwlo .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#lwzhtixwlo .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#lwzhtixwlo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="mfr" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">mfr</th>
+<th id="model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">model</th>
+<th id="year" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">year</th>
+<th id="trim" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">trim</th>
+<th id="bdy_style" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">bdy_style</th>
+<th id="hp" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">hp</th>
+<th id="ctry_origin" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">ctry_origin</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="mfr" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Ford</td>
+<td class="gt_row gt_center" headers="model" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">GT</td>
+<td class="gt_row gt_center" headers="year" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">2017</td>
+<td class="gt_row gt_center" headers="trim" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Base Coupe</td>
+<td class="gt_row gt_center" headers="bdy_style" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">coupe</td>
+<td class="gt_row gt_center" headers="hp" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">647</td>
+<td class="gt_row gt_center" headers="ctry_origin" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">United States</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="mfr" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Ferrari</td>
+<td class="gt_row gt_center" headers="model" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">458 Speciale</td>
+<td class="gt_row gt_center" headers="year" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">2015</td>
+<td class="gt_row gt_center" headers="trim" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Base Coupe</td>
+<td class="gt_row gt_center" headers="bdy_style" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">coupe</td>
+<td class="gt_row gt_center" headers="hp" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">597</td>
+<td class="gt_row gt_center" headers="ctry_origin" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Italy</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="mfr" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Ferrari</td>
+<td class="gt_row gt_center" headers="model" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">458 Spider</td>
+<td class="gt_row gt_center" headers="year" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">2015</td>
+<td class="gt_row gt_center" headers="trim" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Base</td>
+<td class="gt_row gt_center" headers="bdy_style" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">convertible</td>
+<td class="gt_row gt_center" headers="hp" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">562</td>
+<td class="gt_row gt_center" headers="ctry_origin" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Italy</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="mfr" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Ferrari</td>
+<td class="gt_row gt_center" headers="model" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">458 Italia</td>
+<td class="gt_row gt_center" headers="year" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">2014</td>
+<td class="gt_row gt_center" headers="trim" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Base Coupe</td>
+<td class="gt_row gt_center" headers="bdy_style" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">coupe</td>
+<td class="gt_row gt_center" headers="hp" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">562</td>
+<td class="gt_row gt_center" headers="ctry_origin" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Italy</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="mfr" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Ferrari</td>
+<td class="gt_row gt_center" headers="model" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">488 GTB</td>
+<td class="gt_row gt_center" headers="year" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">2016</td>
+<td class="gt_row gt_center" headers="trim" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Base Coupe</td>
+<td class="gt_row gt_center" headers="bdy_style" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">coupe</td>
+<td class="gt_row gt_center" headers="hp" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">661</td>
+<td class="gt_row gt_center" headers="ctry_origin" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Italy</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="mfr" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Ferrari</td>
+<td class="gt_row gt_center" headers="model" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">California</td>
+<td class="gt_row gt_center" headers="year" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">2015</td>
+<td class="gt_row gt_center" headers="trim" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Base Convertible</td>
+<td class="gt_row gt_center" headers="bdy_style" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">convertible</td>
+<td class="gt_row gt_center" headers="hp" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">553</td>
+<td class="gt_row gt_center" headers="ctry_origin" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Italy</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section><section id="reactable-tables" class="level3"><h3 class="anchored" data-anchor-id="reactable-tables">{reactable} Tables</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-3a1cd35cca1cd3dec86e" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3a1cd35cca1cd3dec86e">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"mfr":["Ford","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Acura","Nissan","Lamborghini","Lamborghini","Lamborghini","Bentley","Maserati","Maserati","Maserati","BMW","BMW","BMW","BMW","BMW","Aston Martin","Aston Martin","Aston Martin","Aston Martin","Chevrolet","Dodge","Audi","Audi","Audi","Audi","Audi","Lotus","Jaguar","Mercedes-Benz","Mercedes-Benz","Tesla","Porsche","Porsche","Porsche","Porsche","McLaren","Rolls-Royce","Rolls-Royce"],"model":["GT","458 Speciale","458 Spider","458 Italia","488 GTB","California","GTC4Lusso","FF","F12Berlinetta","LaFerrari","NSX","GT-R","Aventador","Huracan","Gallardo","Continental GT","Granturismo","Quattroporte","Ghibli","6-Series","i8","M4","M5","M6","DB11","Rapide S","Vanquish","Vantage","Corvette","Viper","R8","RS 7","S6","S7","S8","Evora","F-Type","AMG GT","SL-Class","Model S","718 Boxster","718 Cayman","911","Panamera","570","Dawn","Wraith"],"year":[2017,2015,2015,2014,2016,2015,2017,2015,2015,2015,2017,2016,2015,2015,2014,2016,2016,2016,2016,2016,2016,2016,2016,2016,2017,2016,2016,2016,2016,2017,2015,2016,2016,2016,2016,2017,2016,2016,2016,2017,2017,2017,2016,2016,2016,2016,2016],"trim":["Base Coupe","Base Coupe","Base","Base Coupe","Base Coupe","Base Convertible","Base Coupe","Base Coupe","Base Coupe","Base Coupe","Base Coupe","Premium Coupe","LP 700-4 Coupe","LP 610-4 Coupe","LP 550-2 Coupe","V8 Coupe","Sport Coupe","S Sedan","Base Sedan","640 I Coupe","Mega World Coupe","Base Coupe","Base Sedan","Base Coupe","Base Coupe","Base Sedan","Base Coupe","V8 GT (Manual) Coupe","Z06 Coupe","GT Coupe","4.2 (Manual) Coupe","Quattro Hatchback","Premium Plus quattro Sedan","Prestige quattro Hatchback","Base Sedan","2+2 Coupe","Base (Manual) Coupe","S Coupe","SL400 Convertible","75D","Base Convertible","Base Coupe","Carrera Coupe","Base Sedan","Base Coupe","Base Convertible","Base Coupe"],"bdy_style":["coupe","coupe","convertible","coupe","coupe","convertible","coupe","coupe","coupe","coupe","coupe","coupe","coupe","coupe","coupe","coupe","coupe","sedan","sedan","coupe","coupe","coupe","sedan","coupe","coupe","sedan","coupe","coupe","coupe","coupe","coupe","hatchback","sedan","hatchback","sedan","coupe","coupe","coupe","convertible","sedan","convertible","coupe","coupe","sedan","coupe","convertible","coupe"],"hp":[647,597,562,562,661,553,680,652,731,949,573,545,700,610,550,500,454,404,345,315,357,425,560,560,608,552,568,430,650,645,430,560,450,450,520,400,340,503,329,259,300,300,350,310,570,563,624],"ctry_origin":["United States","Italy","Italy","Italy","Italy","Italy","Italy","Italy","Italy","Italy","Japan","Japan","Italy","Italy","Italy","United Kingdom","Italy","Italy","Italy","Germany","Germany","Germany","Germany","Germany","United Kingdom","United Kingdom","United Kingdom","United Kingdom","United States","United States","Germany","Germany","Germany","Germany","Germany","United Kingdom","United Kingdom","Germany","Germany","United States","Germany","Germany","Germany","Germany","United Kingdom","United Kingdom","United Kingdom"]},"columns":[{"id":"mfr","name":"mfr","type":"character"},{"id":"model","name":"model","type":"character"},{"id":"year","name":"year","type":"numeric"},{"id":"trim","name":"trim","type":"character"},{"id":"bdy_style","name":"bdy_style","type":"character"},{"id":"hp","name":"hp","type":"numeric"},{"id":"ctry_origin","name":"ctry_origin","type":"character"}],"searchable":true,"striped":true,"theme":{"color":"#333333","backgroundColor":"transparent","borderColor":"rgba(0, 0, 0, 0.1)","highlightColor":"rgba(0, 0, 0, 0.05)","headerStyle":{"backgroundColor":"transparent","borderColor":"rgba(0, 0, 0, 0.1)","borderBottomWidth":"2px","fontWeight":"600"},"searchInputStyle":{"backgroundColor":"#f7e9de"}},"dataKey":"5c05119127ad516db76d92663420a568"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section><section id="what-if-you-have-other-figures-not-included-in-the-script" class="level3"><h3 class="anchored" data-anchor-id="what-if-you-have-other-figures-not-included-in-the-script">What if you have other figures not included in the script?</h3>
+<p>A useful tool for my work was the Web Developer Tools on Firefox where I inspected different parts of the rendered HTML file to later include them in the script by name, you could use that in order to add more support for different figures.</p>
+<p>You can visit my Github repo (link under the table of contents) and contact me there if you need something.</p>
+
+
+</section></section></main><!-- /main --><!-- 100% privacy-first analytics --><script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Made with <a href="https://quarto.org/">Quarto</a> by Aymen Nasri.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Inspired by <a href="https://github.com/spcanelon/silvia">Silvia Canelón</a>.</p>
+</div>
+  </div>
+</footer><script type="application/javascript" src="../_themes/light-dark.js"></script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+</body></html>

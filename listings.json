@@ -1,0 +1,20 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/DataAnalysisProject/index.html",
+      "/posts/How to use the {targets} package to create a pipeline/index.html",
+      "/posts/IMDB Movies Rating Predictor Shiny App/index.html",
+      "/posts/{ggfootball} is now live!/index.html",
+      "/posts/Liverpool vs Ipswich Town Report/index.html",
+      "/posts/Quarto Plots Theme Switcher/index.html",
+      "/posts/Analyzing Liverpool's FC 2023-2024 Premier League Season/index.html",
+      "/posts/Ranking American Hospitals/index.html",
+      "/posts/Analyzing House Sales/index.html",
+      "/posts/Predicting Movie Rental Durations/index.html",
+      "/posts/Exploring the Bitcoin Cryptocurrency Market/index.html",
+      "/posts/Analyzing the IMBD Dataset/index.html",
+      "/posts/Modeling Car Insurance Claim Outcomes/index.html"
+    ]
+  }
+]
