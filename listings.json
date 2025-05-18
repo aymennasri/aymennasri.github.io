@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/Building an LLM-Powered Academic Reports Assistant/index.html",
       "/posts/DataAnalysisProject/index.html",
       "/posts/How to use the {targets} package to create a pipeline/index.html",
       "/posts/IMDB Movies Rating Predictor Shiny App/index.html",
