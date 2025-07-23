@@ -1,7 +1,6 @@
 project:
   type: website
   output-dir: docs
-  resources: CNAME
   preview:
     port: 6526
 website:
