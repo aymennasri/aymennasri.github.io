@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.31">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="dcterms.date" content="2024-08-14">
 <meta name="description" content="Writing a Javascript file to have light/dark themed plots (ggplot2 and plotly) and tables (gt and reactable) depending on your Quarto document theme.">
+
 <title>Quarto Plots/Tables Theme Switcher – Aymen Nasri</title>
 <style>
 code{white-space: pre-wrap;}
@@ -56,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -79,7 +83,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -105,12 +110,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="../../site_libs/plotly-binding-4.10.4/plotly.js"></script><script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script><script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script><link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="../../site_libs/core-js-2.5.3/shim.min.js"></script><script src="../../site_libs/react-18.2.0/react.min.js"></script><script src="../../site_libs/react-18.2.0/react-dom.min.js"></script><script src="../../site_libs/reactwidget-2.0.0/react-tools.js"></script><link href="../../site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+}</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<script src="../../site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="../../site_libs/react-18.2.0/react.min.js"></script>
+<script src="../../site_libs/react-18.2.0/react-dom.min.js"></script>
+<script src="../../site_libs/reactwidget-2.0.0/react-tools.js"></script>
+<link href="../../site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
 <script src="../../site_libs/reactable-binding-0.4.4/reactable.js"></script>
+
+
 </head>
+
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -276,7 +295,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Aymen Nasri</span>
@@ -288,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -303,12 +324,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-</div> <!-- /navcollapse -->
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Quarto Plots/Tables Theme Switcher</h1>
                   <div>
@@ -344,38 +369,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
-  <li>
-<a href="#expected-results" id="toc-expected-results" class="nav-link" data-scroll-target="#expected-results">Expected Results</a>
+  <li><a href="#expected-results" id="toc-expected-results" class="nav-link" data-scroll-target="#expected-results">Expected Results</a>
   <ul class="collapse">
-<li><a href="#ggplot2-plots" id="toc-ggplot2-plots" class="nav-link" data-scroll-target="#ggplot2-plots">{ggplot2} Plots</a></li>
+  <li><a href="#ggplot2-plots" id="toc-ggplot2-plots" class="nav-link" data-scroll-target="#ggplot2-plots">{ggplot2} Plots</a></li>
   <li><a href="#plotly-plots" id="toc-plotly-plots" class="nav-link" data-scroll-target="#plotly-plots">{plotly} Plots</a></li>
   <li><a href="#gt-tables" id="toc-gt-tables" class="nav-link" data-scroll-target="#gt-tables">{gt} Tables</a></li>
   <li><a href="#reactable-tables" id="toc-reactable-tables" class="nav-link" data-scroll-target="#reactable-tables">{reactable} Tables</a></li>
   <li><a href="#what-if-you-have-other-figures-not-included-in-the-script" id="toc-what-if-you-have-other-figures-not-included-in-the-script" class="nav-link" data-scroll-target="#what-if-you-have-other-figures-not-included-in-the-script">What if you have other figures not included in the script?</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/aymennasri/QuartoPlotsThemeSwitcher"><i class="bi bi-github"></i>Javascript Code</a></li></ul></div></nav>
+<div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/aymennasri/QuartoPlotsThemeSwitcher"><i class="bi bi-github"></i>Javascript Code</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><section id="introduction" class="level2"><h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>While customizing my website’s style, I thought about having light and dark themes for both my posts and the plots included in them, eventually stumbling by <a href="https://mickael.canouil.fr/posts/2023-05-30-quarto-light-dark/">Mickaël Canouil’s post</a> about having this option for ggplot2 plots.</p>
 <p>However, I also had plotly plots and gt/reactable tables which required different treatment in the script as plotly produced SVG files and gt/reactable tables were simply tables in HTML but much more complex due to their special structure.</p>
-</section><section id="code" class="level2"><h2 class="anchored" data-anchor-id="code">Code</h2>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
 <p>As mentioned in Mickaël Canouil’s post, we have to use <code>knitr</code> as the engine to generate the images; the only difference is that I created an alternative <code>knitr</code> handler for the light theme identical to the dark one.</p>
 <p>Steps to follow :</p>
 <ol type="1">
 <li>Include this code in the YAML header of your Quarto document. (Don’t forget to enable light and dark themes for your page)</li>
 </ol>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">knitr Options</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Light/Dark Themes</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">knitr Options</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Light/Dark Themes</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="sourceCode" id="cb1"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">knitr</span><span class="kw">:</span><span class="at"> </span></span>
@@ -407,70 +439,67 @@ If you want to apply it to your Quarto website, you should include the page them
 <li>Add your ggplot2 themes and customize it to your likening.</li>
 </ol>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Light Theme</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Dark Theme</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Light Theme</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Dark Theme</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">light_theme</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu">theme_solarized_2</span><span class="op">(</span><span class="op">)</span> <span class="op">%+%</span> </span>
-<span>    <span class="fu">theme</span><span class="op">(</span></span>
-<span>      plot.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#FFF1E5"</span><span class="op">)</span>,</span>
-<span>      panel.border <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      axis.line <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#586e75"</span>,</span>
-<span>                               linetype <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>      axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#586e75"</span><span class="op">)</span>,</span>
-<span>      axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#002b36"</span><span class="op">)</span>,</span>
-<span>      legend.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#FFF1E5"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span> </span>
-<span></span>
-<span><span class="fu">theme_set</span><span class="op">(</span><span class="fu">light_theme</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">lightsvglite</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span>, <span class="va">width</span>, <span class="va">height</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu">reset_theme_settings</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu">theme_set</span><span class="op">(</span><span class="fu">light_theme</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu">ggsave</span><span class="op">(</span></span>
-<span>    filename <span class="op">=</span> <span class="va">file</span>,</span>
-<span>    width <span class="op">=</span> <span class="va">width</span>,</span>
-<span>    height <span class="op">=</span> <span class="va">height</span>,</span>
-<span>    dev <span class="op">=</span> <span class="st">"svg"</span>,</span>
-<span>    bg <span class="op">=</span> <span class="st">"transparent"</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>light_theme <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_solarized_2</span>() <span class="sc">%+%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FFF1E5"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#586e75"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">linetype =</span> <span class="dv">1</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#586e75"</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#002b36"</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FFF1E5"</span>))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">light_theme</span>())</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>lightsvglite <span class="ot">&lt;-</span> <span class="cf">function</span>(file, width, height) {</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">on.exit</span>(<span class="fu">reset_theme_settings</span>())</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_set</span>(<span class="fu">light_theme</span>())</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">filename =</span> file,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> height,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">dev =</span> <span class="st">"svg"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"transparent"</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">theme_dark</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu">theme_solarized_2</span><span class="op">(</span>light <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%+%</span></span>
-<span>    <span class="fu">theme</span><span class="op">(</span></span>
-<span>      text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      axis.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      legend.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      legend.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      strip.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      rect <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#272b30"</span>, fill <span class="op">=</span> <span class="st">"#272b30"</span><span class="op">)</span>,</span>
-<span>      plot.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#222222"</span>, colour <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>      axis.line <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      axis.ticks <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      plot.subtitle <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      plot.caption <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
-<span>      legend.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#222222"</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">darksvglite</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span>, <span class="va">width</span>, <span class="va">height</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu">reset_theme_settings</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_dark</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu">ggsave</span><span class="op">(</span></span>
-<span>    filename <span class="op">=</span> <span class="va">file</span>,</span>
-<span>    width <span class="op">=</span> <span class="va">width</span>,</span>
-<span>    height <span class="op">=</span> <span class="va">height</span>,</span>
-<span>    dev <span class="op">=</span> <span class="st">"svg"</span>,</span>
-<span>    bg <span class="op">=</span> <span class="st">"transparent"</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>theme_dark <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_solarized_2</span>(<span class="at">light =</span> F) <span class="sc">%+%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">rect =</span> <span class="fu">element_rect</span>(<span class="at">colour =</span> <span class="st">"#272b30"</span>, <span class="at">fill =</span> <span class="st">"#272b30"</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#222222"</span>, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#222222"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>darksvglite <span class="ot">&lt;-</span> <span class="cf">function</span>(file, width, height) {</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">on.exit</span>(<span class="fu">reset_theme_settings</span>())</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_set</span>(<span class="fu">theme_dark</span>())</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">filename =</span> file,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> height,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">dev =</span> <span class="st">"svg"</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"transparent"</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -493,9 +522,11 @@ For Quarto Websites
 <div class="sourceCode" id="cb5"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include-after-body</span><span class="kw">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">  text</span><span class="kw">: </span><span class="ch">|</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    &lt;script type="application/javascript" src="light-dark.js"&gt;&lt;/script&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<details><summary>
+<details>
+<summary>
 Javascript code
-</summary><div class="sourceCode" id="cb6"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Author: Aymen Nasri</span></span>
+</summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Author: Aymen Nasri</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Version: &lt;1.2.0&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Description: Change plots theme depending on body class (quarto-light or quarto-dark)</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Originally made by Mickaël Canouil</span></span>
@@ -726,39 +757,53 @@ Javascript code
 <span id="cb6-229"><a href="#cb6-229" aria-hidden="true" tabindex="-1"></a><span class="co">// Run on page load and immediately</span></span>
 <span id="cb6-230"><a href="#cb6-230" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"DOMContentLoaded"</span><span class="op">,</span> updateImageSrc)<span class="op">;</span></span>
 <span id="cb6-231"><a href="#cb6-231" aria-hidden="true" tabindex="-1"></a><span class="fu">updateImageSrc</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details></section><section id="expected-results" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="expected-results">Expected Results</h2>
-<section id="ggplot2-plots" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="ggplot2-plots">{ggplot2} Plots</h3>
-<div class="quarto-layout-panel" style="text-align:center;" data-layout-ncol="2">
+</details>
+</section>
+<section id="expected-results" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="expected-results">Expected Results</h2>
+<section id="ggplot2-plots" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="ggplot2-plots">{ggplot2} Plots</h3>
+<div class="quarto-layout-panel" data-layout-ncol="2" style="text-align:center;">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="assets/light.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Light mode ON"><img src="assets/light.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Scatter plot on a light background with light mode switched on."></a></p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="assets/light.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Light mode ON"><img src="assets/light.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Scatter plot on a light background with light mode switched on."></a></p>
 </figure>
 </div>
-<figcaption>Light mode <strong>ON</strong></figcaption></figure>
+<figcaption>Light mode <strong>ON</strong></figcaption>
+</figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="assets/dark.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Dark mode ON"><img src="assets/dark.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Scatter plot on a dark background with dark mode switched on."></a></p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="assets/dark.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Dark mode ON"><img src="assets/dark.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Scatter plot on a dark background with dark mode switched on."></a></p>
 </figure>
 </div>
-<figcaption>Dark mode <strong>ON</strong></figcaption></figure>
+<figcaption>Dark mode <strong>ON</strong></figcaption>
+</figure>
 </div>
 </div>
 </div>
 </div>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Switch the light/dark mode from the navbar to see the results.</span></div></div>
-</section><section id="plotly-plots" class="level3"><h3 class="anchored" data-anchor-id="plotly-plots">{plotly} Plots</h3>
+</section>
+<section id="plotly-plots" class="level3">
+<h3 class="anchored" data-anchor-id="plotly-plots">{plotly} Plots</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item" id="htmlwidget-e75f45ea85b030073d53" style="width:100%;height:464px;"></div>
 <script type="application/json" data-for="htmlwidget-e75f45ea85b030073d53">{"x":{"visdat":{"1a915224bae7a":["function () ","plotlyVisDat"]},"cur_data":"1a915224bae7a","attrs":{"1a915224bae7a":{"labels":{},"values":{},"marker":{"colors":["#636EFA","#EF553B","#00CC96"]},"textinfo":"label+percent","hoverinfo":"text","text":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Distribution of Penguin Species in Palmer Penguins Dataset","showlegend":true,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["Adelie","Gentoo","Chinstrap"],"values":[152,124,68],"marker":{"color":"rgba(31,119,180,1)","colors":["#636EFA","#EF553B","#00CC96"],"line":{"color":"rgba(255,255,255,1)"}},"textinfo":"label+percent","hoverinfo":["text","text","text"],"text":["Adelie :  152  penguins","Gentoo :  124  penguins","Chinstrap :  68  penguins"],"type":"pie","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section><section id="gt-tables" class="level3"><h3 class="anchored" data-anchor-id="gt-tables">{gt} Tables</h3>
+</section>
+<section id="gt-tables" class="level3">
+<h3 class="anchored" data-anchor-id="gt-tables">{gt} Tables</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div id="lwzhtixwlo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1211,8 +1256,10 @@ Javascript code
   height: 0px !important;
 }
 </style>
+
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings header">
+<thead>
+<tr class="gt_col_headings header">
 <th id="mfr" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">mfr</th>
 <th id="model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">model</th>
 <th id="year" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">year</th>
@@ -1220,7 +1267,8 @@ Javascript code
 <th id="bdy_style" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">bdy_style</th>
 <th id="hp" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">hp</th>
 <th id="ctry_origin" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">ctry_origin</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_center" headers="mfr" style="border-top-width: 1px; border-top-style: solid; border-top-color: #D3D3D3; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #D3D3D3">Ford</td>
@@ -1278,22 +1326,33 @@ Javascript code
 </tr>
 </tbody>
 </table>
+
 </div>
 </div>
 </div>
-</section><section id="reactable-tables" class="level3"><h3 class="anchored" data-anchor-id="reactable-tables">{reactable} Tables</h3>
+</section>
+<section id="reactable-tables" class="level3">
+<h3 class="anchored" data-anchor-id="reactable-tables">{reactable} Tables</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div class="reactable html-widget html-fill-item" id="htmlwidget-3a1cd35cca1cd3dec86e" style="width:auto;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-3a1cd35cca1cd3dec86e">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"mfr":["Ford","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Ferrari","Acura","Nissan","Lamborghini","Lamborghini","Lamborghini","Bentley","Maserati","Maserati","Maserati","BMW","BMW","BMW","BMW","BMW","Aston Martin","Aston Martin","Aston Martin","Aston Martin","Chevrolet","Dodge","Audi","Audi","Audi","Audi","Audi","Lotus","Jaguar","Mercedes-Benz","Mercedes-Benz","Tesla","Porsche","Porsche","Porsche","Porsche","McLaren","Rolls-Royce","Rolls-Royce"],"model":["GT","458 Speciale","458 Spider","458 Italia","488 GTB","California","GTC4Lusso","FF","F12Berlinetta","LaFerrari","NSX","GT-R","Aventador","Huracan","Gallardo","Continental GT","Granturismo","Quattroporte","Ghibli","6-Series","i8","M4","M5","M6","DB11","Rapide S","Vanquish","Vantage","Corvette","Viper","R8","RS 7","S6","S7","S8","Evora","F-Type","AMG GT","SL-Class","Model S","718 Boxster","718 Cayman","911","Panamera","570","Dawn","Wraith"],"year":[2017,2015,2015,2014,2016,2015,2017,2015,2015,2015,2017,2016,2015,2015,2014,2016,2016,2016,2016,2016,2016,2016,2016,2016,2017,2016,2016,2016,2016,2017,2015,2016,2016,2016,2016,2017,2016,2016,2016,2017,2017,2017,2016,2016,2016,2016,2016],"trim":["Base Coupe","Base Coupe","Base","Base Coupe","Base Coupe","Base Convertible","Base Coupe","Base Coupe","Base Coupe","Base Coupe","Base Coupe","Premium Coupe","LP 700-4 Coupe","LP 610-4 Coupe","LP 550-2 Coupe","V8 Coupe","Sport Coupe","S Sedan","Base Sedan","640 I Coupe","Mega World Coupe","Base Coupe","Base Sedan","Base Coupe","Base Coupe","Base Sedan","Base Coupe","V8 GT (Manual) Coupe","Z06 Coupe","GT Coupe","4.2 (Manual) Coupe","Quattro Hatchback","Premium Plus quattro Sedan","Prestige quattro Hatchback","Base Sedan","2+2 Coupe","Base (Manual) Coupe","S Coupe","SL400 Convertible","75D","Base Convertible","Base Coupe","Carrera Coupe","Base Sedan","Base Coupe","Base Convertible","Base Coupe"],"bdy_style":["coupe","coupe","convertible","coupe","coupe","convertible","coupe","coupe","coupe","coupe","coupe","coupe","coupe","coupe","coupe","coupe","coupe","sedan","sedan","coupe","coupe","coupe","sedan","coupe","coupe","sedan","coupe","coupe","coupe","coupe","coupe","hatchback","sedan","hatchback","sedan","coupe","coupe","coupe","convertible","sedan","convertible","coupe","coupe","sedan","coupe","convertible","coupe"],"hp":[647,597,562,562,661,553,680,652,731,949,573,545,700,610,550,500,454,404,345,315,357,425,560,560,608,552,568,430,650,645,430,560,450,450,520,400,340,503,329,259,300,300,350,310,570,563,624],"ctry_origin":["United States","Italy","Italy","Italy","Italy","Italy","Italy","Italy","Italy","Italy","Japan","Japan","Italy","Italy","Italy","United Kingdom","Italy","Italy","Italy","Germany","Germany","Germany","Germany","Germany","United Kingdom","United Kingdom","United Kingdom","United Kingdom","United States","United States","Germany","Germany","Germany","Germany","Germany","United Kingdom","United Kingdom","Germany","Germany","United States","Germany","Germany","Germany","Germany","United Kingdom","United Kingdom","United Kingdom"]},"columns":[{"id":"mfr","name":"mfr","type":"character"},{"id":"model","name":"model","type":"character"},{"id":"year","name":"year","type":"numeric"},{"id":"trim","name":"trim","type":"character"},{"id":"bdy_style","name":"bdy_style","type":"character"},{"id":"hp","name":"hp","type":"numeric"},{"id":"ctry_origin","name":"ctry_origin","type":"character"}],"searchable":true,"striped":true,"theme":{"color":"#333333","backgroundColor":"transparent","borderColor":"rgba(0, 0, 0, 0.1)","highlightColor":"rgba(0, 0, 0, 0.05)","headerStyle":{"backgroundColor":"transparent","borderColor":"rgba(0, 0, 0, 0.1)","borderBottomWidth":"2px","fontWeight":"600"},"searchInputStyle":{"backgroundColor":"#f7e9de"}},"dataKey":"5c05119127ad516db76d92663420a568"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section><section id="what-if-you-have-other-figures-not-included-in-the-script" class="level3"><h3 class="anchored" data-anchor-id="what-if-you-have-other-figures-not-included-in-the-script">What if you have other figures not included in the script?</h3>
+</section>
+<section id="what-if-you-have-other-figures-not-included-in-the-script" class="level3">
+<h3 class="anchored" data-anchor-id="what-if-you-have-other-figures-not-included-in-the-script">What if you have other figures not included in the script?</h3>
 <p>A useful tool for my work was the Web Developer Tools on Firefox where I inspected different parts of the rendered HTML file to later include them in the script by name, you could use that in order to add more support for different figures.</p>
 <p>You can visit my Github repo (link under the table of contents) and contact me there if you need something.</p>
 
 
-</section></section></main><!-- /main --><!-- 100% privacy-first analytics --><script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><script id="quarto-html-after-body" type="application/javascript">
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- 100% privacy-first analytics -->
+<script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1706,7 +1765,8 @@ Javascript code
   });
   </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Made with <a href="https://quarto.org/">Quarto</a> by Aymen Nasri.</p>
 </div>   
@@ -1717,7 +1777,9 @@ Javascript code
 <p>Inspired by <a href="https://github.com/spcanelon/silvia">Silvia Canelón</a>.</p>
 </div>
   </div>
-</footer><script type="application/javascript" src="../_themes/light-dark.js"></script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+</footer>
+<script type="application/javascript" src="../_themes/light-dark.js"></script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
@@ -1749,6 +1811,8 @@ Javascript code
   
 })();
           </script>
+
+
 
 
 </body></html>

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.31">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="">
 <meta name="dcterms.date" content="2024-05-31">
 <meta name="description" content="Originally a DataCamp Project in Python that I converted to R containing EDA about cryptocurrencies.">
+
 <title>Exploring the Bitcoin Cryptocurrency Market – Aymen Nasri</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -80,7 +84,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -106,9 +111,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+}</script>
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
 </head>
+
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -274,7 +283,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Aymen Nasri</span>
@@ -286,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -301,12 +312,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-</div> <!-- /navcollapse -->
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Exploring the Bitcoin Cryptocurrency Market</h1>
                   <div>
@@ -341,10 +356,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li><a href="#discard-the-cryptocurrencies-without-a-market-capitalization" id="toc-discard-the-cryptocurrencies-without-a-market-capitalization" class="nav-link active" data-scroll-target="#discard-the-cryptocurrencies-without-a-market-capitalization"><span class="header-section-number">1</span> Discard the cryptocurrencies without a market capitalization</a></li>
+  <li><a href="#discard-the-cryptocurrencies-without-a-market-capitalization" id="toc-discard-the-cryptocurrencies-without-a-market-capitalization" class="nav-link active" data-scroll-target="#discard-the-cryptocurrencies-without-a-market-capitalization"><span class="header-section-number">1</span> Discard the cryptocurrencies without a market capitalization</a></li>
   <li><a href="#how-big-is-bitcoin-compared-with-the-rest-of-the-cryptocurrencies" id="toc-how-big-is-bitcoin-compared-with-the-rest-of-the-cryptocurrencies" class="nav-link" data-scroll-target="#how-big-is-bitcoin-compared-with-the-rest-of-the-cryptocurrencies"><span class="header-section-number">2</span> How big is Bitcoin compared with the rest of the cryptocurrencies?</a></li>
   <li><a href="#making-the-plot-easier-to-read-and-more-informative" id="toc-making-the-plot-easier-to-read-and-more-informative" class="nav-link" data-scroll-target="#making-the-plot-easier-to-read-and-more-informative"><span class="header-section-number">3</span> Making the plot easier to read and more informative</a></li>
   <li><a href="#what-is-going-on-volatility-in-cryptocurrencies" id="toc-what-is-going-on-volatility-in-cryptocurrencies" class="nav-link" data-scroll-target="#what-is-going-on-volatility-in-cryptocurrencies"><span class="header-section-number">4</span> What is going on?! Volatility in cryptocurrencies</a></li>
@@ -352,33 +368,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#ok-those-are-interesting.-lets-check-the-weekly-series-too." id="toc-ok-those-are-interesting.-lets-check-the-weekly-series-too." class="nav-link" data-scroll-target="#ok-those-are-interesting.-lets-check-the-weekly-series-too."><span class="header-section-number">6</span> Ok, those are… interesting. Let’s check the weekly Series too.</a></li>
   <li><a href="#how-small-is-small" id="toc-how-small-is-small" class="nav-link" data-scroll-target="#how-small-is-small"><span class="header-section-number">7</span> How small is small?</a></li>
   <li><a href="#most-coins-are-tiny" id="toc-most-coins-are-tiny" class="nav-link" data-scroll-target="#most-coins-are-tiny"><span class="header-section-number">8</span> Most coins are tiny</a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><p>Since the launch of Bitcoin in 2008, hundreds of similar projects based on the blockchain technology have emerged. We call these cryptocurrencies (also coins or cryptos in the Internet slang). Some are extremely valuable nowadays, and others may have the potential to become extremely valuable in the future. In fact, on the 6th of December of 2017, Bitcoin has a <a href="https://en.wikipedia.org/wiki/Market_capitalization">market capitalization</a> above $200 billion.</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p>Since the launch of Bitcoin in 2008, hundreds of similar projects based on the blockchain technology have emerged. We call these cryptocurrencies (also coins or cryptos in the Internet slang). Some are extremely valuable nowadays, and others may have the potential to become extremely valuable in the future. In fact, on the 6th of December of 2017, Bitcoin has a <a href="https://en.wikipedia.org/wiki/Market_capitalization">market capitalization</a> above $200 billion.</p>
 <p><a href="image.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="image.png" class="img-fluid"></a></p>
-<p><sup><em>1</em></sup><strong>WARNING</strong>: The cryptocurrency market is exceptionally volatile<sup>2</sup> and any money you put in might disappear into thin air. Cryptocurrencies mentioned here <strong>might be scams</strong> similar to <a href="https://en.wikipedia.org/wiki/Ponzi_scheme">Ponzi Schemes</a> or have many other issues (overvaluation, technical, etc.). <strong>Please do not mistake this for investment advice</strong>.</p>
-<p><sup><em>2</em></sup><strong>Update on March 2020</strong>: Well, it turned out to be volatile indeed*</p>
+<p><sup><em>1</em></sup> <strong>WARNING</strong>: The cryptocurrency market is exceptionally volatile<sup>2</sup> and any money you put in might disappear into thin air. Cryptocurrencies mentioned here <strong>might be scams</strong> similar to <a href="https://en.wikipedia.org/wiki/Ponzi_scheme">Ponzi Schemes</a> or have many other issues (overvaluation, technical, etc.). <strong>Please do not mistake this for investment advice</strong>.</p>
+<p><sup><em>2</em></sup> <strong>Update on March 2020</strong>: Well, it turned out to be volatile indeed*</p>
 <p>That said, let’s get to business. We will start with a CSV we conveniently downloaded on the 6th of December of 2017 using the coinmarketcap API (NOTE: The public API went private in 2020 and is no longer available) named <code>datasets/coinmarketcap_06122017.csv</code>.</p>
 <p><strong>Originally a DataCamp Python project that I converted to R.</strong></p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Used libraries</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Used libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Reading datasets/coinmarketcap_06122017.csv</span></span>
-<span><span class="va">dec6</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">'datasets/coinmarketcap_06122017.csv'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Selecting the 'id' and the 'market_cap_usd' columns</span></span>
-<span><span class="va">market_cap_raw</span> <span class="op">&lt;-</span> <span class="va">dec6</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">market_cap_usd</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Counting the number of values</span></span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">market_cap_raw</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading datasets/coinmarketcap_06122017.csv</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dec6 <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'datasets/coinmarketcap_06122017.csv'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the 'id' and the 'market_cap_usd' columns</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>market_cap_raw <span class="ot">&lt;-</span> dec6 <span class="sc">%&gt;%</span> <span class="fu">select</span>(id, market_cap_usd)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Counting the number of values</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(market_cap_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -386,8 +410,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 </div>
 </div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Inspecting the data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">market_cap_raw</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(market_cap_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -396,15 +420,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="discard-the-cryptocurrencies-without-a-market-capitalization" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="discard-the-cryptocurrencies-without-a-market-capitalization">
-<span class="header-section-number">1</span> Discard the cryptocurrencies without a market capitalization</h2>
-<p>Why do the <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> for <code>id</code> and <code>market_cap_usd</code> differ above? It is because some cryptocurrencies listed in coinmarketcap.com have no known market capitalization, this is represented by <code>NaN</code> in the data, and <code>NaN</code>s are not counted by <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code>. These cryptocurrencies are of little interest to us in this analysis, so they are safe to remove.</p>
+<section id="discard-the-cryptocurrencies-without-a-market-capitalization" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="discard-the-cryptocurrencies-without-a-market-capitalization"><span class="header-section-number">1</span> Discard the cryptocurrencies without a market capitalization</h2>
+<p>Why do the <code>count()</code> for <code>id</code> and <code>market_cap_usd</code> differ above? It is because some cryptocurrencies listed in coinmarketcap.com have no known market capitalization, this is represented by <code>NaN</code> in the data, and <code>NaN</code>s are not counted by <code>count()</code>. These cryptocurrencies are of little interest to us in this analysis, so they are safe to remove.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Filtering out rows without a market capitalization</span></span>
-<span><span class="va">cap</span> <span class="op">&lt;-</span> <span class="va">market_cap_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">market_cap_usd</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Counting the number of values again</span></span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">cap</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering out rows without a market capitalization</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cap <span class="ot">&lt;-</span> market_cap_raw <span class="sc">%&gt;%</span> <span class="fu">filter</span>(market_cap_usd <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Counting the number of values again</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(cap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -413,77 +437,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="how-big-is-bitcoin-compared-with-the-rest-of-the-cryptocurrencies" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="how-big-is-bitcoin-compared-with-the-rest-of-the-cryptocurrencies">
-<span class="header-section-number">2</span> How big is Bitcoin compared with the rest of the cryptocurrencies?</h2>
+</section>
+<section id="how-big-is-bitcoin-compared-with-the-rest-of-the-cryptocurrencies" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="how-big-is-bitcoin-compared-with-the-rest-of-the-cryptocurrencies"><span class="header-section-number">2</span> How big is Bitcoin compared with the rest of the cryptocurrencies?</h2>
 <p>At the time of writing, Bitcoin is under serious competition from other projects, but it is still dominant in market capitalization. Let’s plot the market capitalization for the top 10 coins as a barplot to better visualize this.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Declaring these now for later use in the plots</span></span>
-<span><span class="va">TOP_CAP_TITLE</span> <span class="op">&lt;-</span> <span class="st">'Top 10 market capitalization'</span></span>
-<span><span class="va">TOP_CAP_YLABEL</span> <span class="op">&lt;-</span> <span class="st">'% of total cap'</span></span>
-<span></span>
-<span><span class="co"># Selecting the first 10 rows and calculating market_cap_perc</span></span>
-<span><span class="va">cap10</span> <span class="op">&lt;-</span> <span class="va">cap</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">market_cap_usd</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>market_cap_perc <span class="op">=</span> <span class="va">market_cap_usd</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">market_cap_usd</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Ordering the percentages</span></span>
-<span><span class="va">cap10</span> <span class="op">&lt;-</span> <span class="va">cap10</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">id</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">market_cap_perc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Plotting the barplot with the title defined above </span></span>
-<span><span class="va">cap10</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">market_cap_perc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="va">TOP_CAP_TITLE</span>, y <span class="op">=</span> <span class="va">TOP_CAP_YLABEL</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>        axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Declaring these now for later use in the plots</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>TOP_CAP_TITLE <span class="ot">&lt;-</span> <span class="st">'Top 10 market capitalization'</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>TOP_CAP_YLABEL <span class="ot">&lt;-</span> <span class="st">'% of total cap'</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the first 10 rows and calculating market_cap_perc</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>cap10 <span class="ot">&lt;-</span> cap <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(market_cap_usd)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">market_cap_perc =</span> market_cap_usd <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> <span class="fu">sum</span>(market_cap_usd)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordering the percentages</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>cap10 <span class="ot">&lt;-</span> cap10 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">fct_reorder</span>(id, <span class="fu">desc</span>(market_cap_perc)))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the barplot with the title defined above </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>cap10 <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(id, market_cap_perc)) <span class="sc">+</span> </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> TOP_CAP_TITLE, <span class="at">y =</span> TOP_CAP_YLABEL) <span class="sc">+</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="index_files/figure-html/unnamed-chunk-5-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/unnamed-chunk-5-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-5-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/unnamed-chunk-5-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="making-the-plot-easier-to-read-and-more-informative" class="level2" data-number="3"><h2 data-number="3" class="anchored" data-anchor-id="making-the-plot-easier-to-read-and-more-informative">
-<span class="header-section-number">3</span> Making the plot easier to read and more informative</h2>
+</section>
+<section id="making-the-plot-easier-to-read-and-more-informative" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="making-the-plot-easier-to-read-and-more-informative"><span class="header-section-number">3</span> Making the plot easier to read and more informative</h2>
 <p>While the plot above is informative enough, it can be improved. Bitcoin is too big, and the other coins are hard to distinguish because of this. Instead of the percentage, let’s use a log<sup>10</sup> scale of the “raw” capitalization. Plus, let’s use color to group similar coins and make the plot more informative<sup>1</sup>.</p>
 <p>For the colors rationale: bitcoin-cash and bitcoin-gold are forks of the bitcoin <a href="https://en.wikipedia.org/wiki/Blockchain">blockchain</a><sup>2</sup>.</p>
 <p>Ethereum and Cardano both offer Turing Complete <a href="https://en.wikipedia.org/wiki/Smart_contract">smart contracts</a>. Iota and Ripple are not minable. Dash, Litecoin, and Monero get their own color.</p>
 <p><sup>1</sup><em>This coloring is a simplification. There are more differences and similarities that are not being represented here.</em></p>
 <p><sup>2</sup><em>The bitcoin forks are actually <strong>very</strong> different, but it is out of scope to talk about them here. Please see the warning above and do your own research.</em></p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Colors for the bar plot</span></span>
-<span><span class="va">COLORS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'orange'</span>, <span class="st">'green'</span>, <span class="st">'orange'</span>, <span class="st">'cyan'</span>, <span class="st">'cyan'</span>, <span class="st">'blue'</span>, <span class="st">'gray'</span>, <span class="st">'orange'</span>, <span class="st">'red'</span>, <span class="st">'green'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Plotting market_cap_usd as before but adding the colors and scaling the y-axis  </span></span>
-<span><span class="va">cap10</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">market_cap_usd</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">COLORS</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_log.html">label_log</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="va">TOP_CAP_TITLE</span>, y <span class="op">=</span> <span class="st">"log(USD)"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>        axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors for the bar plot</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>COLORS <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'orange'</span>, <span class="st">'green'</span>, <span class="st">'orange'</span>, <span class="st">'cyan'</span>, <span class="st">'cyan'</span>, <span class="st">'blue'</span>, <span class="st">'gray'</span>, <span class="st">'orange'</span>, <span class="st">'red'</span>, <span class="st">'green'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting market_cap_usd as before but adding the colors and scaling the y-axis  </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cap10 <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(id, market_cap_usd)) <span class="sc">+</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> COLORS) <span class="sc">+</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_log</span>(<span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> TOP_CAP_TITLE, <span class="at">y =</span> <span class="st">"log(USD)"</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="index_files/figure-html/unnamed-chunk-6-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/unnamed-chunk-6-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-6-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/unnamed-chunk-6-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="what-is-going-on-volatility-in-cryptocurrencies" class="level2" data-number="4"><h2 data-number="4" class="anchored" data-anchor-id="what-is-going-on-volatility-in-cryptocurrencies">
-<span class="header-section-number">4</span> What is going on?! Volatility in cryptocurrencies</h2>
+</section>
+<section id="what-is-going-on-volatility-in-cryptocurrencies" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="what-is-going-on-volatility-in-cryptocurrencies"><span class="header-section-number">4</span> What is going on?! Volatility in cryptocurrencies</h2>
 <p>The cryptocurrencies market has been spectacularly volatile since the first exchange opened. This notebook didn’t start with a big, bold warning for nothing. Let’s explore this volatility a bit more! We will begin by selecting and plotting the 24 hours and 7 days percentage change, which we already have available.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Selecting the id, percent_change_24h and percent_change_7d columns</span></span>
-<span><span class="va">volatility</span> <span class="op">&lt;-</span> <span class="va">dec6</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">percent_change_24h</span>, <span class="va">percent_change_7d</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Dropping all NaN rows</span></span>
-<span><span class="va">volatility</span> <span class="op">&lt;-</span> <span class="va">volatility</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Sorting the DataFrame by percent_change_24h in ascending order</span></span>
-<span><span class="va">volatility</span> <span class="op">&lt;-</span> <span class="va">volatility</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">percent_change_24h</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Checking the first few rows</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">volatility</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the id, percent_change_24h and percent_change_7d columns</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>volatility <span class="ot">&lt;-</span> dec6 <span class="sc">%&gt;%</span> <span class="fu">select</span>(id, percent_change_24h, percent_change_7d)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Dropping all NaN rows</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>volatility <span class="ot">&lt;-</span> volatility <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorting the DataFrame by percent_change_24h in ascending order</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>volatility <span class="ot">&lt;-</span> volatility <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(percent_change_24h)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the first few rows</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(volatility)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -492,81 +521,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="well-we-can-already-see-that-things-are-a-bit-crazy" class="level2" data-number="5"><h2 data-number="5" class="anchored" data-anchor-id="well-we-can-already-see-that-things-are-a-bit-crazy">
-<span class="header-section-number">5</span> Well, we can already see that things are <em>a bit</em> crazy</h2>
+</section>
+<section id="well-we-can-already-see-that-things-are-a-bit-crazy" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="well-we-can-already-see-that-things-are-a-bit-crazy"><span class="header-section-number">5</span> Well, we can already see that things are <em>a bit</em> crazy</h2>
 <p>It seems you can lose a lot of money quickly on cryptocurrencies. Let’s plot the top 10 biggest gainers and top 10 losers in market capitalization.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Defining a function with 2 parameters, the series to plot and the title</span></span>
-<span><span class="va">top10_subplot</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">volatility_series</span>, <span class="va">percent_change_col</span>, <span class="va">title</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    </span>
-<span>    <span class="co"># Plotting the barchart for the top 10 losers</span></span>
-<span>    <span class="va">top10_losers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">volatility_series</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span>    <span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">top10_losers</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">id</span>, <span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">percent_change_col</span><span class="op">)</span><span class="op">)</span>, y <span class="op">=</span> <span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">percent_change_col</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, fill <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"% Change"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>              axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>        </span>
-<span>    <span class="co"># Plotting the barchart for the top 10 winners</span></span>
-<span>    <span class="va">top10_winners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">volatility_series</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span>    <span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">top10_winners</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">id</span>, <span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">percent_change_col</span><span class="op">)</span><span class="op">)</span>, y <span class="op">=</span> <span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">percent_change_col</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, fill <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>              axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>              axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>    </span>
-<span>    <span class="co"># Combining the two side by side plots</span></span>
-<span>    <span class="va">g</span> <span class="op">=</span> <span class="op">(</span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>      <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span><span class="va">title</span><span class="op">)</span></span>
-<span>    </span>
-<span>    <span class="co"># Disabling the return value NULL</span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">DTITLE</span> <span class="op">&lt;-</span> <span class="st">"24 hours top losers and winners"</span></span>
-<span></span>
-<span><span class="co"># Calling the function above with the 24 hours period series and title DTITLE</span></span>
-<span><span class="va">vol_series</span> <span class="op">&lt;-</span> <span class="va">volatility</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">percent_change_24h</span><span class="op">)</span></span>
-<span><span class="fu">top10_subplot</span><span class="op">(</span><span class="va">vol_series</span>, <span class="st">"percent_change_24h"</span>, <span class="va">DTITLE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining a function with 2 parameters, the series to plot and the title</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>top10_subplot <span class="ot">&lt;-</span> <span class="cf">function</span>(volatility_series, percent_change_col, title) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plotting the barchart for the top 10 losers</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    top10_losers <span class="ot">&lt;-</span> <span class="fu">head</span>(volatility_series, <span class="dv">10</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    p1 <span class="ot">&lt;-</span> top10_losers <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(id, <span class="sc">!!</span><span class="fu">sym</span>(percent_change_col)), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(percent_change_col))) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"% Change"</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plotting the barchart for the top 10 winners</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    top10_winners <span class="ot">&lt;-</span> <span class="fu">tail</span>(volatility_series, <span class="dv">10</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    p2 <span class="ot">&lt;-</span> top10_winners <span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(id, <span class="sc">!!</span><span class="fu">sym</span>(percent_change_col)), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(percent_change_col))) <span class="sc">+</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combining the two side by side plots</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    g <span class="ot">=</span> (p1 <span class="sc">+</span> p2) <span class="sc">+</span> </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plot_annotation</span>(title)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Disabling the return value NULL</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(g)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>DTITLE <span class="ot">&lt;-</span> <span class="st">"24 hours top losers and winners"</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Calling the function above with the 24 hours period series and title DTITLE</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>vol_series <span class="ot">&lt;-</span> volatility <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(percent_change_24h)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="fu">top10_subplot</span>(vol_series, <span class="st">"percent_change_24h"</span>, DTITLE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="index_files/figure-html/unnamed-chunk-8-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/unnamed-chunk-8-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-8-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/unnamed-chunk-8-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="ok-those-are-interesting.-lets-check-the-weekly-series-too." class="level2" data-number="6"><h2 data-number="6" class="anchored" data-anchor-id="ok-those-are-interesting.-lets-check-the-weekly-series-too.">
-<span class="header-section-number">6</span> Ok, those are… interesting. Let’s check the weekly Series too.</h2>
+</section>
+<section id="ok-those-are-interesting.-lets-check-the-weekly-series-too." class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="ok-those-are-interesting.-lets-check-the-weekly-series-too."><span class="header-section-number">6</span> Ok, those are… interesting. Let’s check the weekly Series too.</h2>
 <p>800% daily increase?! Why are we doing this tutorial and not buying random coins?<sup>1</sup></p>
 <p>After calming down, let’s reuse the function defined above to see what is going weekly instead of daily.</p>
 <p><sup><em>1</em></sup><em>Please take a moment to understand the implications of the red plots on how much value some cryptocurrencies lose in such short periods of time</em></p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Sorting in ascending order</span></span>
-<span><span class="va">volatility7d</span> <span class="op">&lt;-</span> <span class="va">volatility</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">percent_change_7d</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">WTITLE</span> <span class="op">&lt;-</span> <span class="st">"Weekly top losers and winners"</span></span>
-<span></span>
-<span><span class="co"># Calling the top10_subplot function</span></span>
-<span><span class="fu">top10_subplot</span><span class="op">(</span><span class="va">volatility7d</span>, <span class="st">"percent_change_7d"</span>, <span class="va">WTITLE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorting in ascending order</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>volatility7d <span class="ot">&lt;-</span> volatility <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(percent_change_7d)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>WTITLE <span class="ot">&lt;-</span> <span class="st">"Weekly top losers and winners"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calling the top10_subplot function</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">top10_subplot</span>(volatility7d, <span class="st">"percent_change_7d"</span>, WTITLE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="index_files/figure-html/unnamed-chunk-9-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/unnamed-chunk-9-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-9-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/unnamed-chunk-9-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="how-small-is-small" class="level2" data-number="7"><h2 data-number="7" class="anchored" data-anchor-id="how-small-is-small">
-<span class="header-section-number">7</span> How small is small?</h2>
+</section>
+<section id="how-small-is-small" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="how-small-is-small"><span class="header-section-number">7</span> How small is small?</h2>
 <p>The names of the cryptocurrencies above are quite unknown, and there is a considerable fluctuation between the 1 and 7 days percentage changes. As with stocks, and many other financial products, the smaller the capitalization, the bigger the risk and reward. Smaller cryptocurrencies are less stable projects in general, and therefore even riskier investments than the bigger ones<sup>1</sup>. Let’s classify our dataset based on Investopedia’s capitalization definitions for company stocks.</p>
 <p><sup>1</sup><em>Cryptocurrencies are a new asset class, so they are not directly comparable to stocks. Furthermore, there are no limits set in stone for what a “small” or “large” stock is. Finally, some investors argue that bitcoin is similar to gold, this would make them more comparable to a <a href="https://www.investopedia.com/terms/c/commodity.asp">commodity</a></em> <em>instead.</em></p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Selecting everything bigger than 10 billion </span></span>
-<span><span class="va">largecaps</span> <span class="op">&lt;-</span> <span class="va">cap</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">market_cap_usd</span> <span class="op">&gt;</span> <span class="fl">1e+10</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Printing out largecaps</span></span>
-<span><span class="va">largecaps</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting everything bigger than 10 billion </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>largecaps <span class="ot">&lt;-</span> cap <span class="sc">%&gt;%</span> <span class="fu">filter</span>(market_cap_usd <span class="sc">&gt;</span> <span class="fl">1e+10</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Printing out largecaps</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>largecaps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -575,8 +609,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="most-coins-are-tiny" class="level2" data-number="8"><h2 data-number="8" class="anchored" data-anchor-id="most-coins-are-tiny">
-<span class="header-section-number">8</span> Most coins are tiny</h2>
+</section>
+<section id="most-coins-are-tiny" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="most-coins-are-tiny"><span class="header-section-number">8</span> Most coins are tiny</h2>
 <p>These are the market cap definitions from Investopedia:</p>
 <ul>
 <li>Large cap: +10 billion</li>
@@ -587,43 +622,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Note that many coins are not comparable to large companies in market cap, so let’s divert from the original Investopedia definition by merging categories.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Defining a function for counting different market caps from the "cap" DataFrame</span></span>
-<span><span class="va">capcount</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">filter_string</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cap</span>, <span class="op">!</span><span class="op">!</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/parse_expr.html">parse_expr</a></span><span class="op">(</span><span class="va">filter_string</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co"># Labels for the plot</span></span>
-<span><span class="va">LABELS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"biggish"</span>, <span class="st">"micro"</span>, <span class="st">"nano"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Using capcount to count the not_so_small cryptos</span></span>
-<span><span class="va">biggish</span> <span class="op">&lt;-</span> <span class="fu">capcount</span><span class="op">(</span><span class="st">"market_cap_usd &gt; 3e+8"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Same as above for micro ...</span></span>
-<span><span class="va">micro</span> <span class="op">&lt;-</span> <span class="fu">capcount</span><span class="op">(</span><span class="st">"market_cap_usd &gt;= 5e+7 &amp; market_cap_usd &lt; 3e+8"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># ... and for nano</span></span>
-<span><span class="va">nano</span> <span class="op">&lt;-</span> <span class="fu">capcount</span><span class="op">(</span><span class="st">"market_cap_usd &lt; 5e+7"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Making a list with the 3 counts</span></span>
-<span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">biggish</span>, <span class="va">micro</span>, <span class="va">nano</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Creating a data frame for plotting</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Category <span class="op">=</span> <span class="va">LABELS</span>, Count <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Plotting them with ggplot2</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Category</span>, y <span class="op">=</span> <span class="va">Count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Market Cap Distribution"</span>, x <span class="op">=</span> <span class="st">"Category"</span>, y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining a function for counting different market caps from the "cap" DataFrame</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>capcount <span class="ot">&lt;-</span> <span class="cf">function</span>(filter_string) {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">nrow</span>(<span class="fu">filter</span>(cap, <span class="sc">!!</span>rlang<span class="sc">::</span><span class="fu">parse_expr</span>(filter_string))))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels for the plot</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>LABELS <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"biggish"</span>, <span class="st">"micro"</span>, <span class="st">"nano"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Using capcount to count the not_so_small cryptos</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>biggish <span class="ot">&lt;-</span> <span class="fu">capcount</span>(<span class="st">"market_cap_usd &gt; 3e+8"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Same as above for micro ...</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>micro <span class="ot">&lt;-</span> <span class="fu">capcount</span>(<span class="st">"market_cap_usd &gt;= 5e+7 &amp; market_cap_usd &lt; 3e+8"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ... and for nano</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>nano <span class="ot">&lt;-</span> <span class="fu">capcount</span>(<span class="st">"market_cap_usd &lt; 5e+7"</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Making a list with the 3 counts</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(biggish, micro, nano)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a data frame for plotting</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Category =</span> LABELS, <span class="at">Count =</span> values)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting them with ggplot2</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Category, <span class="at">y =</span> Count)) <span class="sc">+</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Market Cap Distribution"</span>, <span class="at">x =</span> <span class="st">"Category"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="index_files/figure-html/unnamed-chunk-11-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="index_files/figure-html/unnamed-chunk-11-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-11-1..light.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="index_files/figure-html/unnamed-chunk-11-1..light.svg" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
 
 
-</section></main><!-- /main --><!-- 100% privacy-first analytics --><script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<!-- 100% privacy-first analytics -->
+<script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1036,7 +1077,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Made with <a href="https://quarto.org/">Quarto</a> by Aymen Nasri.</p>
 </div>   
@@ -1047,7 +1089,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Inspired by <a href="https://github.com/spcanelon/silvia">Silvia Canelón</a>.</p>
 </div>
   </div>
-</footer><script type="application/javascript" src="../_themes/light-dark.js"></script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+</footer>
+<script type="application/javascript" src="../_themes/light-dark.js"></script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
@@ -1079,6 +1123,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 })();
           </script>
+
+
 
 
 </body></html>

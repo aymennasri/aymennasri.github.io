@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.31">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="dcterms.date" content="2024-07-22">
 <meta name="description" content="Revisiting the Programming Assignment 3 from the Coursera course R Programming by Johns Hopkins University.">
+
 <title>Ranking American Hospitals – Aymen Nasri</title>
 <style>
 code{white-space: pre-wrap;}
@@ -56,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -76,7 +80,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-6d475c2ca909bc66b24ed29e16d74c6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -103,7 +108,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+
+
 </head>
+
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -269,7 +277,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Aymen Nasri</span>
@@ -281,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -296,12 +306,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-</div> <!-- /navcollapse -->
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Ranking American Hospitals</h1>
                   <div>
@@ -335,87 +349,96 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#preparing-data" id="toc-preparing-data" class="nav-link" data-scroll-target="#preparing-data">Preparing Data</a></li>
-  <li>
-<a href="#finding-the-best-hospital-in-a-state" id="toc-finding-the-best-hospital-in-a-state" class="nav-link" data-scroll-target="#finding-the-best-hospital-in-a-state">Finding the best hospital in a state</a>
+  <li><a href="#finding-the-best-hospital-in-a-state" id="toc-finding-the-best-hospital-in-a-state" class="nav-link" data-scroll-target="#finding-the-best-hospital-in-a-state">Finding the best hospital in a state</a>
   <ul class="collapse">
-<li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
   <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#ranking-hospitals-by-outcome-in-a-state" id="toc-ranking-hospitals-by-outcome-in-a-state" class="nav-link" data-scroll-target="#ranking-hospitals-by-outcome-in-a-state">Ranking hospitals by outcome in a state</a>
+  </ul></li>
+  <li><a href="#ranking-hospitals-by-outcome-in-a-state" id="toc-ranking-hospitals-by-outcome-in-a-state" class="nav-link" data-scroll-target="#ranking-hospitals-by-outcome-in-a-state">Ranking hospitals by outcome in a state</a>
   <ul class="collapse">
-<li><a href="#code-1" id="toc-code-1" class="nav-link" data-scroll-target="#code-1">Code</a></li>
+  <li><a href="#code-1" id="toc-code-1" class="nav-link" data-scroll-target="#code-1">Code</a></li>
   <li><a href="#testing-1" id="toc-testing-1" class="nav-link" data-scroll-target="#testing-1">Testing</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#ranking-hospitals-in-all-states" id="toc-ranking-hospitals-in-all-states" class="nav-link" data-scroll-target="#ranking-hospitals-in-all-states">Ranking hospitals in all states</a>
+  </ul></li>
+  <li><a href="#ranking-hospitals-in-all-states" id="toc-ranking-hospitals-in-all-states" class="nav-link" data-scroll-target="#ranking-hospitals-in-all-states">Ranking hospitals in all states</a>
   <ul class="collapse">
-<li><a href="#code-2" id="toc-code-2" class="nav-link" data-scroll-target="#code-2">Code</a></li>
+  <li><a href="#code-2" id="toc-code-2" class="nav-link" data-scroll-target="#code-2">Code</a></li>
   <li><a href="#testing-2" id="toc-testing-2" class="nav-link" data-scroll-target="#testing-2">Testing</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="introduction" class="level1"><h1>Introduction</h1>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>In February 4, 2024, I completed the <a href="https://www.coursera.org/learn/r-programming">R Programming course</a> which proved to be quite a challenge as a beginner at the time. Five months later, I wanted to give it another try to simplify the functions required to pass for other learners that may have encountered complicated solutions online.</p>
 <p>Required files : <a href="https://github.com/aymennasri/ProgrammingAssignment3/blob/main/outcome-of-care-measures.csv">Dataset</a> - <a href="https://github.com/aymennasri/ProgrammingAssignment3/blob/main/Hospital_Revised_Flatfiles.pdf">Dataset Documentation</a> - <a href="https://github.com/aymennasri/ProgrammingAssignment3/blob/main/ProgAssignment3.pdf">Assignment</a></p>
-</section><section id="preparing-data" class="level1"><h1>Preparing Data</h1>
+</section>
+<section id="preparing-data" class="level1">
+<h1>Preparing Data</h1>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Used Libraries</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Loading the dataset</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"outcome-of-care-measures.csv"</span>, colClasses <span class="op">=</span> <span class="st">"character"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Extracting and cleaning useful columns</span></span>
-<span><span class="va">hospitals</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    heart_attack <span class="op">=</span> <span class="va">Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack</span>,</span>
-<span>    heart_failure <span class="op">=</span> <span class="va">Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure</span>,</span>
-<span>    pneumonia <span class="op">=</span> <span class="va">Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia</span>,</span>
-<span>    <span class="va">State</span>,</span>
-<span>    hospital_name <span class="op">=</span> <span class="va">Hospital.Name</span>,</span>
-<span>    .keep <span class="op">=</span> <span class="st">"none"</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Converting the values back to numeric and handling the `Not Available` cases</span></span>
-<span><span class="va">outcomes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"heart_attack"</span>, <span class="st">"heart_failure"</span>, <span class="st">"pneumonia"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">hospitals</span><span class="op">[</span><span class="va">outcomes</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">hospitals</span><span class="op">[</span><span class="va">outcomes</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"Not Available"</span>, <span class="cn">NA</span>, <span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Used Libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading the dataset</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"outcome-of-care-measures.csv"</span>, <span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting and cleaning useful columns</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>hospitals <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">heart_attack =</span> Hospital.<span class="fl">30.</span>Day.Death..Mortality..Rates.from.Heart.Attack,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">heart_failure =</span> Hospital.<span class="fl">30.</span>Day.Death..Mortality..Rates.from.Heart.Failure,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">pneumonia =</span> Hospital.<span class="fl">30.</span>Day.Death..Mortality..Rates.from.Pneumonia,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    State,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">hospital_name =</span> Hospital.Name,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting the values back to numeric and handling the `Not Available` cases</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>outcomes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"heart_attack"</span>, <span class="st">"heart_failure"</span>, <span class="st">"pneumonia"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>hospitals[outcomes] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(hospitals[outcomes], <span class="cf">function</span>(x) {</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(x <span class="sc">==</span> <span class="st">"Not Available"</span>, <span class="cn">NA</span>, x))</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="finding-the-best-hospital-in-a-state" class="level1"><h1>Finding the best hospital in a state</h1>
-<section id="code" class="level2"><h2 class="anchored" data-anchor-id="code">Code</h2>
+</section>
+<section id="finding-the-best-hospital-in-a-state" class="level1">
+<h1>Finding the best hospital in a state</h1>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">best</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">state</span>, <span class="va">outcome</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">state</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">hospitals</span><span class="op">$</span><span class="va">State</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"invalid state"</span><span class="op">)</span> <span class="co"># Replace with stop() to comply with the assignment conditions</span></span>
-<span>  <span class="op">}</span></span>
-<span>  </span>
-<span>  <span class="va">outcome</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span></span>
-<span>  <span class="va">outcome_col</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span><span class="op">(</span><span class="va">outcome</span>,</span>
-<span>                        <span class="st">"heart attack"</span> <span class="op">=</span> <span class="st">"heart_attack"</span>,</span>
-<span>                        <span class="st">"heart failure"</span> <span class="op">=</span> <span class="st">"heart_failure"</span>,</span>
-<span>                        <span class="st">"pneumonia"</span> <span class="op">=</span> <span class="st">"pneumonia"</span>,</span>
-<span>                        <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"invalid outcome"</span><span class="op">)</span><span class="op">)</span> <span class="co"># Replace with stop() to comply with the assignment conditions</span></span>
-<span></span>
-<span>  <span class="va">hospitals</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">hospital_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">State</span> <span class="op">==</span> <span class="va">state</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span>, with_ties <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">hospital_name</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>best <span class="ot">&lt;-</span> <span class="cf">function</span>(state, outcome) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>(state <span class="sc">%in%</span> hospitals<span class="sc">$</span>State)) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"invalid state"</span>) <span class="co"># Replace with stop() to comply with the assignment conditions</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  outcome <span class="ot">&lt;-</span> <span class="fu">tolower</span>(outcome)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  outcome_col <span class="ot">&lt;-</span> <span class="cf">switch</span>(outcome,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"heart attack"</span> <span class="ot">=</span> <span class="st">"heart_attack"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"heart failure"</span> <span class="ot">=</span> <span class="st">"heart_failure"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"pneumonia"</span> <span class="ot">=</span> <span class="st">"pneumonia"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">return</span>(<span class="st">"invalid outcome"</span>)) <span class="co"># Replace with stop() to comply with the assignment conditions</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  hospitals <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(hospital_name) <span class="sc">|&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(State <span class="sc">==</span> state) <span class="sc">|&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col))) <span class="sc">|&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_min</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col), <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(hospital_name)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -431,147 +454,161 @@ I replaced stop() with return() in order to prevent it from stopping the renderi
 </div>
 </div>
 <p>After checking whether the state abbreviation inserted by the user is found or not, a best practice is converting the demanded outcome to lowercase.</p>
-<p><code>filter(!is.na(!!sym(outcome_col)))</code> is used to filter any NA values in the specified outcome column using <code><a href="https://rlang.r-lib.org/reference/sym.html">sym()</a></code> that converts a string into a symbol which then gets unquoted by <code>!!</code>, for more information check the documentation by clicking on <code><a href="https://rlang.r-lib.org/reference/sym.html">sym()</a></code>.</p>
-</section><section id="testing" class="level2"><h2 class="anchored" data-anchor-id="testing">Testing</h2>
+<p><code>filter(!is.na(!!sym(outcome_col)))</code> is used to filter any NA values in the specified outcome column using <code>sym()</code> that converts a string into a symbol which then gets unquoted by <code>!!</code>, for more information check the documentation by clicking on <code>sym()</code>.</p>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing</h2>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">best</span><span class="op">(</span><span class="st">"TX"</span>, <span class="st">"heart attack"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">best</span>(<span class="st">"TX"</span>, <span class="st">"heart attack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "CYPRESS FAIRBANKS MEDICAL CENTER"</code></pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">best</span><span class="op">(</span><span class="st">"TX"</span>, <span class="st">"heart failure"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">best</span>(<span class="st">"TX"</span>, <span class="st">"heart failure"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "FORT DUNCAN MEDICAL CENTER"</code></pre>
 </div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">best</span><span class="op">(</span><span class="st">"MD"</span>, <span class="st">"heart attack"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">best</span>(<span class="st">"MD"</span>, <span class="st">"heart attack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "JOHNS HOPKINS HOSPITAL, THE"</code></pre>
 </div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">best</span><span class="op">(</span><span class="st">"MD"</span>, <span class="st">"pneumonia"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">best</span>(<span class="st">"MD"</span>, <span class="st">"pneumonia"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "GREATER BALTIMORE MEDICAL CENTER"</code></pre>
 </div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">best</span><span class="op">(</span><span class="st">"BB"</span>, <span class="st">"heart attack"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">best</span>(<span class="st">"BB"</span>, <span class="st">"heart attack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "invalid state"</code></pre>
 </div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">best</span><span class="op">(</span><span class="st">"NY"</span>, <span class="st">"hert attack"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">best</span>(<span class="st">"NY"</span>, <span class="st">"hert attack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "invalid outcome"</code></pre>
 </div>
 </div>
-</section></section><section id="ranking-hospitals-by-outcome-in-a-state" class="level1"><h1>Ranking hospitals by outcome in a state</h1>
-<section id="code-1" class="level2"><h2 class="anchored" data-anchor-id="code-1">Code</h2>
+</section>
+</section>
+<section id="ranking-hospitals-by-outcome-in-a-state" class="level1">
+<h1>Ranking hospitals by outcome in a state</h1>
+<section id="code-1" class="level2">
+<h2 class="anchored" data-anchor-id="code-1">Code</h2>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rankhospital</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">state</span>, <span class="va">outcome</span>, <span class="va">num</span> <span class="op">=</span> <span class="st">"best"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">state</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">hospitals</span><span class="op">$</span><span class="va">State</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"invalid state"</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  </span>
-<span>  <span class="va">outcome</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span></span>
-<span>  <span class="va">outcome_col</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span><span class="op">(</span><span class="va">outcome</span>,</span>
-<span>                        <span class="st">"heart attack"</span> <span class="op">=</span> <span class="st">"heart_attack"</span>,</span>
-<span>                        <span class="st">"heart failure"</span> <span class="op">=</span> <span class="st">"heart_failure"</span>,</span>
-<span>                        <span class="st">"pneumonia"</span> <span class="op">=</span> <span class="st">"pneumonia"</span>,</span>
-<span>                        <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"invalid outcome"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">state_df</span> <span class="op">&lt;-</span> <span class="va">hospitals</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">State</span> <span class="op">==</span> <span class="va">state</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span>, <span class="va">hospital_name</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="va">num</span> <span class="op">==</span> <span class="st">"best"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">state_df</span> <span class="op">|&gt;</span></span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span>, with_ties <span class="op">=</span> <span class="cn">FALSE</span>, na_rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">hospital_name</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  </span>
-<span>  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">num</span> <span class="op">==</span> <span class="st">"worst"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">state_df</span> <span class="op">|&gt;</span></span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span>, with_ties <span class="op">=</span> <span class="cn">FALSE</span>, na_rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">hospital_name</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  </span>
-<span>  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">num</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw">if</span><span class="op">(</span><span class="va">num</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> <span class="va">num</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">state_df</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">state_df</span><span class="op">$</span><span class="va">hospital_name</span><span class="op">[</span><span class="va">num</span><span class="op">]</span><span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
-<span>    <span class="kw">else</span> <span class="op">{</span></span>
-<span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
-<span>  <span class="op">}</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rankhospital <span class="ot">&lt;-</span> <span class="cf">function</span>(state, outcome, <span class="at">num =</span> <span class="st">"best"</span>) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span>(state <span class="sc">%in%</span> hospitals<span class="sc">$</span>State)) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"invalid state"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  outcome <span class="ot">&lt;-</span> <span class="fu">tolower</span>(outcome)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  outcome_col <span class="ot">&lt;-</span> <span class="cf">switch</span>(outcome,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"heart attack"</span> <span class="ot">=</span> <span class="st">"heart_attack"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"heart failure"</span> <span class="ot">=</span> <span class="st">"heart_failure"</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"pneumonia"</span> <span class="ot">=</span> <span class="st">"pneumonia"</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">return</span>(<span class="st">"invalid outcome"</span>))</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  state_df <span class="ot">&lt;-</span> hospitals <span class="sc">%&gt;%</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(State <span class="sc">==</span> state) <span class="sc">%&gt;%</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col), hospital_name)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(num <span class="sc">==</span> <span class="st">"best"</span>) {</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    state_df <span class="sc">|&gt;</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">slice_min</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col), <span class="at">with_ties =</span> <span class="cn">FALSE</span>, <span class="at">na_rm =</span> T) <span class="sc">|&gt;</span> </span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(hospital_name)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(num <span class="sc">==</span> <span class="st">"worst"</span>) {</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    state_df <span class="sc">|&gt;</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">slice_max</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col), <span class="at">with_ties =</span> <span class="cn">FALSE</span>, <span class="at">na_rm =</span> T) <span class="sc">|&gt;</span> </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(hospital_name)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">is.numeric</span>(num)) {</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(num <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> num <span class="sc">&lt;=</span> <span class="fu">nrow</span>(state_df)) {</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(state_df<span class="sc">$</span>hospital_name[num])</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To match the requirements for handling ties and required conditions, we must sort the values by the outcome and hospital name columns followed by using <code>na_rm</code> and <code>with_ties</code> arguments in <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max()</a></code> which return, combined with <code><a href="https://dplyr.tidyverse.org/reference/pull.html">pull()</a></code>, the demanded rows.</p>
-</section><section id="testing-1" class="level2"><h2 class="anchored" data-anchor-id="testing-1">Testing</h2>
+<p>To match the requirements for handling ties and required conditions, we must sort the values by the outcome and hospital name columns followed by using <code>na_rm</code> and <code>with_ties</code> arguments in <code>slice_min()</code> and <code>slice_max()</code> which return, combined with <code>pull()</code>, the demanded rows.</p>
+</section>
+<section id="testing-1" class="level2">
+<h2 class="anchored" data-anchor-id="testing-1">Testing</h2>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rankhospital</span><span class="op">(</span><span class="st">"TX"</span>, <span class="st">"heart failure"</span>, <span class="fl">4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rankhospital</span>(<span class="st">"TX"</span>, <span class="st">"heart failure"</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "DETAR HOSPITAL NAVARRO"</code></pre>
 </div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rankhospital</span><span class="op">(</span><span class="st">"MD"</span>, <span class="st">"heart attack"</span>, <span class="st">"worst"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rankhospital</span>(<span class="st">"MD"</span>, <span class="st">"heart attack"</span>, <span class="st">"worst"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "HARFORD MEMORIAL HOSPITAL"</code></pre>
 </div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rankhospital</span><span class="op">(</span><span class="st">"MN"</span>, <span class="st">"heart attack"</span>, <span class="fl">5000</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rankhospital</span>(<span class="st">"MN"</span>, <span class="st">"heart attack"</span>, <span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rankhospital</span><span class="op">(</span><span class="st">"NY"</span>, <span class="st">"pneumonia"</span>, <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rankhospital</span>(<span class="st">"NY"</span>, <span class="st">"pneumonia"</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "SISTERS OF CHARITY HOSPITAL"</code></pre>
 </div>
 </div>
-</section></section><section id="ranking-hospitals-in-all-states" class="level1"><h1>Ranking hospitals in all states</h1>
-<section id="code-2" class="level2"><h2 class="anchored" data-anchor-id="code-2">Code</h2>
+</section>
+</section>
+<section id="ranking-hospitals-in-all-states" class="level1">
+<h1>Ranking hospitals in all states</h1>
+<section id="code-2" class="level2">
+<h2 class="anchored" data-anchor-id="code-2">Code</h2>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rankall</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">outcome</span>, <span class="va">num</span> <span class="op">=</span> <span class="st">"best"</span><span class="op">)</span><span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="va">outcome</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span></span>
-<span>  <span class="va">outcome_col</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span><span class="op">(</span><span class="va">outcome</span>,</span>
-<span>                        <span class="st">"heart attack"</span> <span class="op">=</span> <span class="st">"heart_attack"</span>,</span>
-<span>                        <span class="st">"heart failure"</span> <span class="op">=</span> <span class="st">"heart_failure"</span>,</span>
-<span>                        <span class="st">"pneumonia"</span> <span class="op">=</span> <span class="st">"pneumonia"</span>,</span>
-<span>                        <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"invalid outcome"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">state_df</span> <span class="op">&lt;-</span> <span class="va">hospitals</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span>, <span class="va">hospital_name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">State</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="va">num</span> <span class="op">==</span> <span class="st">"best"</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">state_df</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span>, with_ties <span class="op">=</span> <span class="cn">FALSE</span>, na_rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>hospital <span class="op">=</span> <span class="va">hospital_name</span>, state <span class="op">=</span> <span class="va">State</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  </span>
-<span>  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">num</span> <span class="op">==</span> <span class="st">"worst"</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">state_df</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span>, with_ties <span class="op">=</span> <span class="cn">FALSE</span>, na_rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>hospital <span class="op">=</span> <span class="va">hospital_name</span>, state <span class="op">=</span> <span class="va">State</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  </span>
-<span>  <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">num</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw">if</span><span class="op">(</span><span class="va">num</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="va">state_df</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="va">outcome_col</span><span class="op">)</span>, </span>
-<span>                  n <span class="op">=</span> <span class="va">num</span>, </span>
-<span>                  with_ties <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>                  na_rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="va">num</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>hospital <span class="op">=</span> <span class="va">hospital_name</span>, state <span class="op">=</span> <span class="va">State</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">right_join</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">hospitals</span><span class="op">$</span><span class="va">State</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
-<span>    <span class="kw">else</span><span class="op">{</span></span>
-<span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"Invalid num"</span><span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
-<span>  <span class="op">}</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>rankall <span class="ot">&lt;-</span> <span class="cf">function</span>(outcome, <span class="at">num =</span> <span class="st">"best"</span>){</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  outcome <span class="ot">&lt;-</span> <span class="fu">tolower</span>(outcome)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  outcome_col <span class="ot">&lt;-</span> <span class="cf">switch</span>(outcome,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"heart attack"</span> <span class="ot">=</span> <span class="st">"heart_attack"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"heart failure"</span> <span class="ot">=</span> <span class="st">"heart_failure"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"pneumonia"</span> <span class="ot">=</span> <span class="st">"pneumonia"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">return</span>(<span class="st">"invalid outcome"</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  state_df <span class="ot">&lt;-</span> hospitals <span class="sc">|&gt;</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col), hospital_name) <span class="sc">|&gt;</span> </span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(State)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(num <span class="sc">==</span> <span class="st">"best"</span>){</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    state_df <span class="sc">|&gt;</span> </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">slice_min</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col), <span class="at">with_ties =</span> <span class="cn">FALSE</span>, <span class="at">na_rm =</span> T) <span class="sc">|&gt;</span> </span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="at">hospital =</span> hospital_name, <span class="at">state =</span> State)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(num <span class="sc">==</span> <span class="st">"worst"</span>){</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    state_df <span class="sc">|&gt;</span> </span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">slice_max</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col), <span class="at">with_ties =</span> <span class="cn">FALSE</span>, <span class="at">na_rm =</span> T) <span class="sc">|&gt;</span> </span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="at">hospital =</span> hospital_name, <span class="at">state =</span> State)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">is.numeric</span>(num)) {</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(num <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>      state_df <span class="sc">|&gt;</span> </span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice_min</span>(<span class="sc">!!</span><span class="fu">sym</span>(outcome_col), </span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>                  <span class="at">n =</span> num, </span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>                  <span class="at">with_ties =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>                  <span class="at">na_rm =</span> T) <span class="sc">|&gt;</span> </span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(num) <span class="sc">|&gt;</span> </span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="at">hospital =</span> hospital_name, <span class="at">state =</span> State) <span class="sc">|&gt;</span> </span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">right_join</span>(<span class="fu">data.frame</span>(<span class="at">state =</span> <span class="fu">unique</span>(hospitals<span class="sc">$</span>State))) <span class="sc">|&gt;</span> </span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>        <span class="fu">arrange</span>(state)</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>{</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="st">"Invalid num"</span>)</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Often solved with too many lines of code, the case of numeric values for the ranking is easier dealt with by using the <code>n</code> argument that controls the number of rows to display and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> that retrieves them using the index which is the <code>num</code> value in this case.</p>
-<p>However the function will ignore states having less hospitals than the demanded ranking (<code>num</code> argument), that’s why we use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">right_join()</a></code> to add them back followed by <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> to match the output sample in the assignment document.</p>
-</section><section id="testing-2" class="level2"><h2 class="anchored" data-anchor-id="testing-2">Testing</h2>
+<p>Often solved with too many lines of code, the case of numeric values for the ranking is easier dealt with by using the <code>n</code> argument that controls the number of rows to display and <code>slice()</code> that retrieves them using the index which is the <code>num</code> value in this case.</p>
+<p>However the function will ignore states having less hospitals than the demanded ranking (<code>num</code> argument), that’s why we use <code>right_join()</code> to add them back followed by <code>arrange()</code> to match the output sample in the assignment document.</p>
+</section>
+<section id="testing-2" class="level2">
+<h2 class="anchored" data-anchor-id="testing-2">Testing</h2>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu">rankall</span><span class="op">(</span><span class="st">"heart failure"</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">rankall</span>(<span class="st">"heart failure"</span>), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -579,10 +616,12 @@ I replaced stop() with return() in order to prevent it from stopping the renderi
 <col style="width: 91%">
 <col style="width: 8%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">hospital</th>
 <th style="text-align: left;">state</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">WELLMONT HAWKINS COUNTY MEMORIAL HOSPITAL</td>
@@ -628,14 +667,16 @@ I replaced stop() with return() in order to prevent it from stopping the renderi
 </table>
 </div>
 </div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu">rankall</span><span class="op">(</span><span class="st">"pneumonia"</span>, <span class="st">"worst"</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">rankall</span>(<span class="st">"pneumonia"</span>, <span class="st">"worst"</span>), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">hospital</th>
 <th style="text-align: left;">state</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">MAYO CLINIC HEALTH SYSTEM - NORTHLAND, INC</td>
@@ -653,14 +694,16 @@ I replaced stop() with return() in order to prevent it from stopping the renderi
 </table>
 </div>
 </div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">rankall</span><span class="op">(</span><span class="st">"heart attack"</span>, <span class="fl">20</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rankall</span>(<span class="st">"heart attack"</span>, <span class="dv">20</span>), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">hospital</th>
 <th style="text-align: left;">state</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">NA</td>
@@ -709,7 +752,13 @@ I replaced stop() with return() in order to prevent it from stopping the renderi
 </div>
 
 
-</section></section></main><!-- /main --><!-- 100% privacy-first analytics --><script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><script id="quarto-html-after-body" type="application/javascript">
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- 100% privacy-first analytics -->
+<script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1122,7 +1171,8 @@ I replaced stop() with return() in order to prevent it from stopping the renderi
   });
   </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Made with <a href="https://quarto.org/">Quarto</a> by Aymen Nasri.</p>
 </div>   
@@ -1134,6 +1184,8 @@ I replaced stop() with return() in order to prevent it from stopping the renderi
 </div>
   </div>
 </footer>
+
+
 
 
 </body></html>

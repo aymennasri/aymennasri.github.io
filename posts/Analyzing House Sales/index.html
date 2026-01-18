@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.31">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="dcterms.date" content="2024-07-09">
 <meta name="description" content="My solution for the Data Scientist Associate Practical Exam by DataCamp.">
+
 <title>Analyzing House Sales – Aymen Nasri</title>
 <style>
 code{white-space: pre-wrap;}
@@ -56,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -76,7 +80,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-6d475c2ca909bc66b24ed29e16d74c6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -103,7 +108,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+
+
 </head>
+
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -269,7 +277,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Aymen Nasri</span>
@@ -281,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -296,12 +306,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-</div> <!-- /navcollapse -->
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Analyzing House Sales</h1>
                   <div>
@@ -337,10 +351,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">Data Description</a></li>
   <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1">Task 1</a></li>
   <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2">Task 2</a></li>
@@ -348,58 +363,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4">Task 4</a></li>
   <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5">Task 5</a></li>
   <li><a href="#assessing-the-models-performance" id="toc-assessing-the-models-performance" class="nav-link" data-scroll-target="#assessing-the-models-performance">Assessing the models performance</a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="introduction" class="level1"><h1>Introduction</h1>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>RealAgents is a real estate company that focuses on selling houses and sells a variety of types of house in one metropolitan area.</p>
 <p>Some houses sell slowly and sometimes require lowering the price in order to find a buyer. In order to stay competitive, RealAgents would like to optimize the listing prices of the houses it is trying to sell. They want to do this by predicting the sale price of a house given its characteristics. If they can predict the sale price in advance, they can decrease the time to sale.</p>
-</section><section id="data-description" class="level1"><h1>Data Description</h1>
+</section>
+<section id="data-description" class="level1">
+<h1>Data Description</h1>
 <p>The dataset contains records of previous houses sold in the area.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 6%">
 <col style="width: 93%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>Column Name</th>
 <th>Criteria</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td>house_id</td>
-<td>Nominal.  Unique identifier for houses. Missing values not possible.</td>
+<td>Nominal. <br> Unique identifier for houses. <br>Missing values not possible.</td>
 </tr>
 <tr class="even">
 <td>city</td>
-<td>Nominal. The city in which the house is located. One of ‘Silvertown’, ‘Riverford’, ‘Teasdale’ and ‘Poppleton’. Replace missing values with “Unknown”.</td>
+<td>Nominal. <br>The city in which the house is located. One of ‘Silvertown’, ‘Riverford’, ‘Teasdale’ and ‘Poppleton’. <br>Replace missing values with “Unknown”.</td>
 </tr>
 <tr class="odd">
 <td>sale_price</td>
-<td>Discrete. The sale price of the house in whole dollars. Values can be any positive number greater than or equal to zero.Remove missing entries.</td>
+<td>Discrete. <br>The sale price of the house in whole dollars. Values can be any positive number greater than or equal to zero.<br>Remove missing entries.</td>
 </tr>
 <tr class="even">
 <td>sale_date</td>
-<td>Discrete. The date of the last sale of the house. Replace missing values with 2023-01-01.</td>
+<td>Discrete. <br>The date of the last sale of the house. <br>Replace missing values with 2023-01-01.</td>
 </tr>
 <tr class="odd">
 <td>months_listed</td>
-<td>Continuous. The number of months the house was listed on the market prior to its last sale, rounded to one decimal place. Replace missing values with mean number of months listed, to one decimal place.</td>
+<td>Continuous. <br>The number of months the house was listed on the market prior to its last sale, rounded to one decimal place. <br>Replace missing values with mean number of months listed, to one decimal place.</td>
 </tr>
 <tr class="even">
 <td>bedrooms</td>
-<td>Discrete. The number of bedrooms in the house. Any positive values greater than or equal to zero. Replace missing values with the mean number of bedrooms, rounded to the nearest integer.</td>
+<td>Discrete. <br>The number of bedrooms in the house. Any positive values greater than or equal to zero. <br>Replace missing values with the mean number of bedrooms, rounded to the nearest integer.</td>
 </tr>
 <tr class="odd">
 <td>house_type</td>
-<td>Ordinal. One of “Terraced” (two shared walls), “Semi-detached” (one shared wall), or “Detached” (no shared walls). Replace missing values with the most common house type.</td>
+<td>Ordinal. <br>One of “Terraced” (two shared walls), “Semi-detached” (one shared wall), or “Detached” (no shared walls). <br>Replace missing values with the most common house type.</td>
 </tr>
 <tr class="even">
 <td>area</td>
-<td>Continuous. The area of the house in square meters, rounded to one decimal place. Replace missing values with the mean, to one decimal place.</td>
+<td>Continuous. <br>The area of the house in square meters, rounded to one decimal place. <br>Replace missing values with the mean, to one decimal place.</td>
 </tr>
 </tbody>
-</table></section><section id="task-1" class="level1"><h1>Task 1</h1>
+</table>
+</section>
+<section id="task-1" class="level1">
+<h1>Task 1</h1>
 <p>The team at RealAgents knows that the city, that a property is located in, makes a difference to the sale price.</p>
 <p>Unfortunately they believe that this isn’t always recorded in the data.</p>
 <p>Calculate the number of missing values of the <code>city</code>.</p>
@@ -408,8 +439,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Your output should be an object <code>missing_city</code>, that contains the number of missing values in this column.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Reading Data</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"house_sales.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading Data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"house_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 1500 Columns: 8
 ── Column specification ────────────────────────────────────────────────────────
@@ -421,21 +452,23 @@ date (1): sale_date
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Checking missing values</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">city</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking missing values</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(data<span class="sc">$</span>city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Silvertown" "Riverford"  "Teasdale"   "Poppleton"  "--"        </code></pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">missing_city</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">city</span> <span class="op">==</span> <span class="st">"--"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">missing_city</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>missing_city <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(city <span class="sc">==</span> <span class="st">"--"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>missing_city</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 73</code></pre>
 </div>
 </div>
-</section><section id="task-2" class="level1"><h1>Task 2</h1>
+</section>
+<section id="task-2" class="level1">
+<h1>Task 2</h1>
 <p>Before you fit any models, you will need to make sure the data is clean.</p>
 <p>The table below shows what the data should look like.</p>
 <p>Create a cleaned version of the dataframe.</p>
@@ -449,58 +482,60 @@ date (1): sale_date
 <col style="width: 6%">
 <col style="width: 93%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>Column Name</th>
 <th>Criteria</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td>house_id</td>
-<td>Nominal.  Unique identifier for houses. Missing values not possible.</td>
+<td>Nominal. <br> Unique identifier for houses. <br>Missing values not possible.</td>
 </tr>
 <tr class="even">
 <td>city</td>
-<td>Nominal. The city in which the house is located. One of ‘Silvertown’, ‘Riverford’, ‘Teasdale’ and ‘Poppleton’ Replace missing values with “Unknown”.</td>
+<td>Nominal. <br>The city in which the house is located. One of ‘Silvertown’, ‘Riverford’, ‘Teasdale’ and ‘Poppleton’ <br>Replace missing values with “Unknown”.</td>
 </tr>
 <tr class="odd">
 <td>sale_price</td>
-<td>Discrete. The sale price of the house in whole dollars. Values can be any positive number greater than or equal to zero.Remove missing entries.</td>
+<td>Discrete. <br>The sale price of the house in whole dollars. Values can be any positive number greater than or equal to zero.<br>Remove missing entries.</td>
 </tr>
 <tr class="even">
 <td>sale_date</td>
-<td>Discrete. The date of the last sale of the house. Replace missing values with 2023-01-01.</td>
+<td>Discrete. <br>The date of the last sale of the house. <br>Replace missing values with 2023-01-01.</td>
 </tr>
 <tr class="odd">
 <td>months_listed</td>
-<td>Continuous. The number of months the house was listed on the market prior to its last sale, rounded to one decimal place. Replace missing values with mean number of months listed, to one decimal place.</td>
+<td>Continuous. <br>The number of months the house was listed on the market prior to its last sale, rounded to one decimal place. <br>Replace missing values with mean number of months listed, to one decimal place.</td>
 </tr>
 <tr class="even">
 <td>bedrooms</td>
-<td>Discrete. The number of bedrooms in the house. Any positive values greater than or equal to zero. Replace missing values with the mean number of bedrooms, rounded to the nearest integer.</td>
+<td>Discrete. <br>The number of bedrooms in the house. Any positive values greater than or equal to zero. <br>Replace missing values with the mean number of bedrooms, rounded to the nearest integer.</td>
 </tr>
 <tr class="odd">
 <td>house_type</td>
-<td>Ordinal. One of “Terraced”, “Semi-detached”, or “Detached”. Replace missing values with the most common house type.</td>
+<td>Ordinal. <br>One of “Terraced”, “Semi-detached”, or “Detached”. <br>Replace missing values with the most common house type.</td>
 </tr>
 <tr class="even">
 <td>area</td>
-<td>Continuous. The area of the house in square meters, rounded to one decimal place. Replace missing values with the mean, to one decimal place.</td>
+<td>Continuous. <br>The area of the house in square meters, rounded to one decimal place. <br>Replace missing values with the mean, to one decimal place.</td>
 </tr>
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>city <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">city</span> <span class="op">==</span> <span class="st">"--"</span> <span class="op">~</span> <span class="st">"Unknown"</span>,</span>
-<span>                                        <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">city</span><span class="op">)</span>,</span>
-<span>                months_listed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">months_listed</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">months_listed</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">months_listed</span><span class="op">)</span>,</span>
-<span>                house_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">house_type</span> <span class="op">==</span> <span class="st">"Terr."</span> <span class="op">~</span> <span class="st">"Terraced"</span>,</span>
-<span>                                                     <span class="va">house_type</span> <span class="op">==</span> <span class="st">"Semi"</span> <span class="op">~</span> <span class="st">"Semi-detached"</span>,</span>
-<span>                                                     <span class="va">house_type</span> <span class="op">==</span> <span class="st">"Det."</span> <span class="op">~</span> <span class="st">"Detached"</span>,</span>
-<span>                                                     <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">house_type</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove_all</a></span><span class="op">(</span><span class="va">area</span>, <span class="st">"sq.m."</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">clean_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">city =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(city <span class="sc">==</span> <span class="st">"--"</span> <span class="sc">~</span> <span class="st">"Unknown"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="cn">TRUE</span> <span class="sc">~</span> city),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">months_listed =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(months_listed), <span class="fu">round</span>(<span class="fu">mean</span>(months_listed, <span class="at">na.rm =</span> T), <span class="dv">1</span>), months_listed),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">house_type =</span> <span class="fu">factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(house_type <span class="sc">==</span> <span class="st">"Terr."</span> <span class="sc">~</span> <span class="st">"Terraced"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                                                     house_type <span class="sc">==</span> <span class="st">"Semi"</span> <span class="sc">~</span> <span class="st">"Semi-detached"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                                                     house_type <span class="sc">==</span> <span class="st">"Det."</span> <span class="sc">~</span> <span class="st">"Detached"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                                                     <span class="cn">TRUE</span> <span class="sc">~</span> house_type)),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">area =</span> <span class="fu">as.numeric</span>(stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(area, <span class="st">"sq.m."</span>))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(clean_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -514,7 +549,8 @@ date (1): sale_date
 <col style="width: 16%">
 <col style="width: 7%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: right;">house_id</th>
 <th style="text-align: left;">city</th>
 <th style="text-align: right;">sale_price</th>
@@ -523,7 +559,8 @@ date (1): sale_date
 <th style="text-align: right;">bedrooms</th>
 <th style="text-align: left;">house_type</th>
 <th style="text-align: right;">area</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1217792</td>
@@ -591,7 +628,9 @@ date (1): sale_date
 </div>
 </div>
 <p>The rest of the columns already match the conditions.</p>
-</section><section id="task-3" class="level1"><h1>Task 3</h1>
+</section>
+<section id="task-3" class="level1">
+<h1>Task 3</h1>
 <p>The team at RealAgents have told you that they have always believed that the number of bedrooms is the biggest driver of house price.</p>
 <p>Producing a table showing the difference in the average sale price by number of bedrooms along with the variance to investigate this question for the team.</p>
 <ul>
@@ -614,20 +653,22 @@ One of the common mistakes is using the clean_data instead of the original one.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">price_by_rooms</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bedrooms</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>avg_price <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sale_price</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>                    var_price <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">sale_price</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">price_by_rooms</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>price_by_rooms <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(bedrooms) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">avg_price =</span> <span class="fu">round</span>(<span class="fu">mean</span>(sale_price), <span class="dv">1</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var_price =</span> <span class="fu">round</span>(<span class="fu">var</span>(sale_price), <span class="dv">1</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>price_by_rooms</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: right;">bedrooms</th>
 <th style="text-align: right;">avg_price</th>
 <th style="text-align: right;">var_price</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">2</td>
@@ -659,7 +700,9 @@ One of the common mistakes is using the clean_data instead of the original one.
 </div>
 </div>
 </div>
-</section><section id="task-4" class="level1"><h1>Task 4</h1>
+</section>
+<section id="task-4" class="level1">
+<h1>Task 4</h1>
 <div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -675,61 +718,65 @@ You need the caret and kernlab packages installed for the following models in th
 </div>
 <p>Fit a baseline model to predict the sale price of a house.</p>
 <ol type="1">
-<li><p>Fit your model using the data contained in “train.csv” </p></li>
+<li><p>Fit your model using the data contained in “train.csv” <br><br></p></li>
 <li><p>Use “validation.csv” to predict new values based on your model. You must return a dataframe named <code>base_result</code>, that includes <code>house_id</code> and <code>price</code>. The price column must be your predicted values.</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Reading data</span></span>
-<span><span class="va">train</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"train.csv"</span><span class="op">)</span></span>
-<span><span class="va">test</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"validation.csv"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Extracting the sale price column from the train data</span></span>
-<span><span class="va">price_train</span> <span class="op">&lt;-</span> <span class="va">train</span><span class="op">$</span><span class="va">sale_price</span></span>
-<span><span class="va">train</span><span class="op">$</span><span class="va">sale_price</span> <span class="op">=</span> <span class="cn">NULL</span></span>
-<span></span>
-<span><span class="co"># One-hot encoding categorical columns</span></span>
-<span><span class="va">dum1</span> <span class="op">&lt;-</span> <span class="fu">dummyVars</span><span class="op">(</span><span class="st">" ~ ."</span>, data <span class="op">=</span> <span class="va">train</span><span class="op">)</span></span>
-<span><span class="va">train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">dum1</span>, <span class="va">train</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Extracting the house id column before one-hot encoding the columns</span></span>
-<span><span class="va">id</span> <span class="op">&lt;-</span> <span class="va">test</span><span class="op">$</span><span class="va">house_id</span></span>
-<span></span>
-<span><span class="va">dum2</span> <span class="op">&lt;-</span> <span class="fu">dummyVars</span><span class="op">(</span><span class="st">" ~ ."</span>, data <span class="op">=</span> <span class="va">test</span><span class="op">)</span></span>
-<span><span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">dum2</span>, <span class="va">test</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Training the first model with tuning</span></span>
-<span><span class="va">glmnet</span> <span class="op">&lt;-</span> <span class="fu">train</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span>,</span>
-<span>                <span class="va">price_train</span>,</span>
-<span>                method <span class="op">=</span> <span class="st">"glmnet"</span>,</span>
-<span>                tuneLength <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Results dataframe</span></span>
-<span><span class="va">base_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>house_id <span class="op">=</span> <span class="va">id</span>,</span>
-<span>                          price <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">glmnet</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading data</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"train.csv"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"validation.csv"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the sale price column from the train data</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>price_train <span class="ot">&lt;-</span> train<span class="sc">$</span>sale_price</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>train<span class="sc">$</span>sale_price <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># One-hot encoding categorical columns</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>dum1 <span class="ot">&lt;-</span> <span class="fu">dummyVars</span>(<span class="st">" ~ ."</span>, <span class="at">data =</span> train)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">predict</span>(dum1, train)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the house id column before one-hot encoding the columns</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> test<span class="sc">$</span>house_id</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>dum2 <span class="ot">&lt;-</span> <span class="fu">dummyVars</span>(<span class="st">" ~ ."</span>, <span class="at">data =</span> test)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">predict</span>(dum2, test)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Training the first model with tuning</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>glmnet <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="fu">data.frame</span>(train),</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>                price_train,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">"glmnet"</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">tuneLength =</span> <span class="dv">20</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Results dataframe</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>base_result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">house_id =</span> id,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>                          <span class="at">price =</span> <span class="fu">predict</span>(glmnet, <span class="at">newdata =</span> <span class="fu">data.frame</span>(test)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The final values used for the model were <code>alpha</code> = 1 and <code>lambda</code> = 305.2986.</p>
-</section><section id="task-5" class="level1"><h1>Task 5</h1>
+</section>
+<section id="task-5" class="level1">
+<h1>Task 5</h1>
 <p>Fit a comparison model to predict the sale price of a house.</p>
 <ol type="1">
-<li><p>Fit your model using the data contained in “train.csv” </p></li>
+<li><p>Fit your model using the data contained in “train.csv” <br><br></p></li>
 <li><p>Use “validation.csv” to predict new values based on your model. You must return a dataframe named <code>compare_result</code>, that includes <code>house_id</code> and <code>price</code>. The price column must be your predicted values.</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
-<span><span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu">train</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span>,</span>
-<span>            <span class="va">price_train</span>,</span>
-<span>            method <span class="op">=</span> <span class="st">"ranger"</span>,</span>
-<span>            tuneLength <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">compare_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>house_id <span class="op">=</span> <span class="va">id</span>,</span>
-<span>                             price <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="fu">data.frame</span>(train),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            price_train,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">method =</span> <span class="st">"ranger"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>compare_result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">house_id =</span> id,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">price =</span>  <span class="fu">predict</span>(rf, <span class="at">newdata =</span> <span class="fu">data.frame</span>(test)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="assessing-the-models-performance" class="level1"><h1>Assessing the models performance</h1>
+</section>
+<section id="assessing-the-models-performance" class="level1">
+<h1>Assessing the models performance</h1>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu">resamples</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>glmnet <span class="op">=</span> <span class="va">glmnet</span>, rf <span class="op">=</span> <span class="va">rf</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">resamples</span>(<span class="fu">list</span>(<span class="at">glmnet =</span> glmnet, <span class="at">rf =</span> rf)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -770,7 +817,12 @@ You can always tune your models using the tuneLength argument or manually insert
 <p>Both models match the requirements for the RMSE with the random forest one being the best model.</p>
 
 
-</section></main><!-- /main --><!-- 100% privacy-first analytics --><script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<!-- 100% privacy-first analytics -->
+<script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1183,7 +1235,8 @@ You can always tune your models using the tuneLength argument or manually insert
   });
   </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Made with <a href="https://quarto.org/">Quarto</a> by Aymen Nasri.</p>
 </div>   
@@ -1195,6 +1248,8 @@ You can always tune your models using the tuneLength argument or manually insert
 </div>
   </div>
 </footer>
+
+
 
 
 </body></html>

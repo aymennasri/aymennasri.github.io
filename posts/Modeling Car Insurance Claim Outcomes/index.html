@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.31">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="">
 <meta name="dcterms.date" content="2024-03-25">
 <meta name="description" content="DataCamp Project about building a glm model to predict whether a customer will make a claim or not.">
+
 <title>Modeling Car Insurance Claim Outcomes – Aymen Nasri</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -77,7 +81,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-6d475c2ca909bc66b24ed29e16d74c6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-36a64d0b5565ba2166d86a03518864ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -103,9 +108,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+}</script>
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
 </head>
+
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -271,7 +280,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Aymen Nasri</span>
@@ -283,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -298,12 +309,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-</div> <!-- /navcollapse -->
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Modeling Car Insurance Claim Outcomes</h1>
                   <div>
@@ -338,32 +353,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li><a href="#the-dataset-description" id="toc-the-dataset-description" class="nav-link active" data-scroll-target="#the-dataset-description"><span class="header-section-number">1</span> The Dataset description</a></li>
+  <li><a href="#the-dataset-description" id="toc-the-dataset-description" class="nav-link active" data-scroll-target="#the-dataset-description"><span class="header-section-number">1</span> The Dataset description</a></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives"><span class="header-section-number">2</span> Objectives</a></li>
   <li><a href="#used-libraries" id="toc-used-libraries" class="nav-link" data-scroll-target="#used-libraries"><span class="header-section-number">3</span> Used libraries</a></li>
   <li><a href="#cleaning-the-data" id="toc-cleaning-the-data" class="nav-link" data-scroll-target="#cleaning-the-data"><span class="header-section-number">4</span> Cleaning the data</a></li>
   <li><a href="#preparing-the-logistic-regression-models" id="toc-preparing-the-logistic-regression-models" class="nav-link" data-scroll-target="#preparing-the-logistic-regression-models"><span class="header-section-number">5</span> Preparing the Logistic Regression models</a></li>
   <li><a href="#checking-the-results-and-extracting-them" id="toc-checking-the-results-and-extracting-them" class="nav-link" data-scroll-target="#checking-the-results-and-extracting-them"><span class="header-section-number">6</span> Checking the results and extracting them</a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><p>Insurance companies invest a lot of time and money into optimizing their pricing and accurately estimating the likelihood that customers will make a claim. In many countries, insurance is a legal requirement to have car insurance in order to drive a vehicle on public roads, so the market is very large!</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p>Insurance companies invest a lot of time and money into optimizing their pricing and accurately estimating the likelihood that customers will make a claim. In many countries, insurance is a legal requirement to have car insurance in order to drive a vehicle on public roads, so the market is very large!</p>
 <p>Knowing all of this, On the Road car insurance has requested your services in building a model to predict whether a customer will make a claim on their insurance during the policy period. As they have very little expertise and infrastructure for deploying and monitoring machine learning models, they’ve asked you to use simple Logistic Regression, identifying the single feature that results in the best-performing model, as measured by accuracy.</p>
 <p>They have supplied you with their customer data as a csv file called <code>car_insurance.csv</code>, along with a table (below) detailing the column names and descriptions below.</p>
-<section id="the-dataset-description" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="the-dataset-description">
-<span class="header-section-number">1</span> The Dataset description</h2>
+<section id="the-dataset-description" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-dataset-description"><span class="header-section-number">1</span> The Dataset description</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 22%">
 <col style="width: 77%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>Column</th>
 <th>Description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td><code>id</code></td>
@@ -371,77 +397,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>age</code></td>
-<td>
-<p>Client’s age:</p>
+<td><p>Client’s age:</p>
 <ul>
-<li>
-<code>0</code>: 16-25</li>
-<li>
-<code>1</code>: 26-39</li>
-<li>
-<code>2</code>: 40-64</li>
-<li>
-<code>3</code>: 65+</li>
-</ul>
-</td>
+<li><code>0</code>: 16-25</li>
+<li><code>1</code>: 26-39</li>
+<li><code>2</code>: 40-64</li>
+<li><code>3</code>: 65+</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td><code>gender</code></td>
-<td>
-<p>Client’s gender:</p>
+<td><p>Client’s gender:</p>
 <ul>
-<li>
-<code>0</code>: Female</li>
-<li>
-<code>1</code>: Male</li>
-</ul>
-</td>
+<li><code>0</code>: Female</li>
+<li><code>1</code>: Male</li>
+</ul></td>
 </tr>
 <tr class="even">
 <td><code>driving_experience</code></td>
-<td>
-<p>Years the client has been driving:</p>
+<td><p>Years the client has been driving:</p>
 <ul>
-<li>
-<code>0</code>: 0-9</li>
-<li>
-<code>1</code>: 10-19</li>
-<li>
-<code>2</code>: 20-29</li>
-<li>
-<code>3</code>: 30+</li>
-</ul>
-</td>
+<li><code>0</code>: 0-9</li>
+<li><code>1</code>: 10-19</li>
+<li><code>2</code>: 20-29</li>
+<li><code>3</code>: 30+</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td><code>education</code></td>
-<td>
-<p>Client’s level of education:</p>
+<td><p>Client’s level of education:</p>
 <ul>
-<li>
-<code>0</code>: No education</li>
-<li>
-<code>1</code>: High school</li>
-<li>
-<code>2</code>: University</li>
-</ul>
-</td>
+<li><code>0</code>: No education</li>
+<li><code>1</code>: High school</li>
+<li><code>2</code>: University</li>
+</ul></td>
 </tr>
 <tr class="even">
 <td><code>income</code></td>
-<td>
-<p>Client’s income level:</p>
+<td><p>Client’s income level:</p>
 <ul>
-<li>
-<code>0</code>: Poverty</li>
-<li>
-<code>1</code>: Working class</li>
-<li>
-<code>2</code>: Middle class</li>
-<li>
-<code>3</code>: Upper class</li>
-</ul>
-</td>
+<li><code>0</code>: Poverty</li>
+<li><code>1</code>: Working class</li>
+<li><code>2</code>: Middle class</li>
+<li><code>3</code>: Upper class</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td><code>credit_score</code></td>
@@ -449,39 +448,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>vehicle_ownership</code></td>
-<td>
-<p>Client’s vehicle ownership status:</p>
+<td><p>Client’s vehicle ownership status:</p>
 <ul>
-<li>
-<code>0</code>: Does not own their vehilce (paying off finance)</li>
-<li>
-<code>1</code>: Owns their vehicle</li>
-</ul>
-</td>
+<li><code>0</code>: Does not own their vehilce (paying off finance)</li>
+<li><code>1</code>: Owns their vehicle</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td><code>vehcile_year</code></td>
-<td>
-<p>Year of vehicle registration:</p>
+<td><p>Year of vehicle registration:</p>
 <ul>
-<li>
-<code>0</code>: Before 2015</li>
-<li>
-<code>1</code>: 2015 or later</li>
-</ul>
-</td>
+<li><code>0</code>: Before 2015</li>
+<li><code>1</code>: 2015 or later</li>
+</ul></td>
 </tr>
 <tr class="even">
 <td><code>married</code></td>
-<td>
-<p>Client’s marital status:</p>
+<td><p>Client’s marital status:</p>
 <ul>
-<li>
-<code>0</code>: Not married</li>
-<li>
-<code>1</code>: Married</li>
-</ul>
-</td>
+<li><code>0</code>: Not married</li>
+<li><code>1</code>: Married</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td><code>children</code></td>
@@ -497,15 +484,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>vehicle_type</code></td>
-<td>
-<p>Type of car:</p>
+<td><p>Type of car:</p>
 <ul>
-<li>
-<code>0</code>: Sedan</li>
-<li>
-<code>1</code>: Sports car</li>
-</ul>
-</td>
+<li><code>0</code>: Sedan</li>
+<li><code>1</code>: Sports car</li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td><code>speeding_violations</code></td>
@@ -521,41 +504,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>outcome</code></td>
-<td>
-<p>Whether the client made a claim on their car insurance (response variable):</p>
+<td><p>Whether the client made a claim on their car insurance (response variable):</p>
 <ul>
-<li>
-<code>0</code>: No claim</li>
-<li>
-<code>1</code>: Made a claim</li>
-</ul>
-</td>
+<li><code>0</code>: No claim</li>
+<li><code>1</code>: Made a claim</li>
+</ul></td>
 </tr>
 </tbody>
-</table></section><section id="objectives" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="objectives">
-<span class="header-section-number">2</span> Objectives</h2>
+</table>
+</section>
+<section id="objectives" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="objectives"><span class="header-section-number">2</span> Objectives</h2>
 <p>The Head of Data at On the Road car insurance has asked for your support as they venture into the world of machine learning! They would like you to start by investigating their customer data and cleaning it in preparation for modeling. Once that is complete, they would like you to tell them which feature produces the best accuracy for predicting whether a customer will make a car insurance claim. Specifically, they have set the following tasks:</p>
 <ul>
 <li>Investigate and clean the data, so that there are no missing values and remove the “id” column.</li>
 <li>Find the feature with the best predictive performance for a car insurance claim (“outcome”) by creating simple Logistic Regression models (each with a single feature) and assessing their accuracy.</li>
 <li>Create a data frame called best_feature_df, containing columns named “best_feature” and “best_accuracy” with the name of the feature with the highest accuracy, and the respective accuracy score.</li>
-</ul></section><section id="used-libraries" class="level2" data-number="3"><h2 data-number="3" class="anchored" data-anchor-id="used-libraries">
-<span class="header-section-number">3</span> Used libraries</h2>
+</ul>
+</section>
+<section id="used-libraries" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="used-libraries"><span class="header-section-number">3</span> Used libraries</h2>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/yardstick">yardstick</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yardstick)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="cleaning-the-data" class="level2" data-number="4"><h2 data-number="4" class="anchored" data-anchor-id="cleaning-the-data">
-<span class="header-section-number">4</span> Cleaning the data</h2>
+</section>
+<section id="cleaning-the-data" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="cleaning-the-data"><span class="header-section-number">4</span> Cleaning the data</h2>
 <ul>
-<li>
-<strong>Reading and inspecting data</strong> : The summary function indicates that <code>credit_score</code> and <code>annual_mileage</code> have null values.</li>
+<li><strong>Reading and inspecting data</strong> : The summary function indicates that <code>credit_score</code> and <code>annual_mileage</code> have null values.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"car_insurance.csv"</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"car_insurance.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -563,8 +546,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 </div>
 </div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">clean_data</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">is.na</span>(clean_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    age            gender           race         driving_experience
  Mode :logical   Mode :logical   Mode :logical   Mode :logical     
@@ -589,40 +572,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>
-<strong>Replacing missing data</strong> : Replacing missing values with the mean value of each column is more convenient than deleting rows, as we can’t just delete approximately 10% of the dataset.</li>
+<li><strong>Replacing missing data</strong> : Replacing missing values with the mean value of each column is more convenient than deleting rows, as we can’t just delete approximately 10% of the dataset.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">clean_data</span><span class="op">$</span><span class="va">annual_mileage</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">clean_data</span><span class="op">$</span><span class="va">annual_mileage</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">clean_data</span><span class="op">$</span><span class="va">annual_mileage</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span><span class="va">clean_data</span><span class="op">$</span><span class="va">credit_score</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">clean_data</span><span class="op">$</span><span class="va">credit_score</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">clean_data</span><span class="op">$</span><span class="va">credit_score</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>clean_data<span class="sc">$</span>annual_mileage[<span class="fu">is.na</span>(clean_data<span class="sc">$</span>annual_mileage)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(clean_data<span class="sc">$</span>annual_mileage, <span class="at">na.rm =</span> T)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>clean_data<span class="sc">$</span>credit_score[<span class="fu">is.na</span>(clean_data<span class="sc">$</span>credit_score)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(clean_data<span class="sc">$</span>credit_score, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="preparing-the-logistic-regression-models" class="level2" data-number="5"><h2 data-number="5" class="anchored" data-anchor-id="preparing-the-logistic-regression-models">
-<span class="header-section-number">5</span> Preparing the Logistic Regression models</h2>
+</section>
+<section id="preparing-the-logistic-regression-models" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="preparing-the-logistic-regression-models"><span class="header-section-number">5</span> Preparing the Logistic Regression models</h2>
 <ul>
 <li>Extracting important values to avoid long lines of code.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">outcome</span> <span class="op">&lt;-</span> <span class="va">clean_data</span><span class="op">$</span><span class="va">outcome</span></span>
-<span><span class="va">features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">clean_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">outcome</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">features_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">features</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">&lt;-</span> clean_data<span class="sc">$</span>outcome</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">names</span>(clean_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>outcome))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>features_scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Using the glue function to call each column using its name (of type string) and to facilitate joining the accuracy score of each feature to the feature_scores tibble.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">col</span> <span class="kw">in</span> <span class="va">features</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">'outcome ~ {col}'</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">clean_data</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span>
-<span>  <span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">accuracy_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">predictions</span> <span class="op">==</span> <span class="va">outcome</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span></span>
-<span>  <span class="va">features_scores</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">features_scores</span><span class="op">$</span><span class="va">features</span> <span class="op">==</span> <span class="va">col</span><span class="op">)</span>,</span>
-<span>                  <span class="st">"accuracy_score"</span><span class="op">]</span> <span class="op">=</span> <span class="va">accuracy_score</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(col <span class="cf">in</span> features){</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  models <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">glue</span>(<span class="st">'outcome ~ {col}'</span>), <span class="at">data =</span> clean_data, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  predictions <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">fitted</span>(models))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  accuracy_score <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(predictions <span class="sc">==</span> outcome))<span class="sc">/</span><span class="fu">length</span>(outcome)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  features_scores[<span class="fu">which</span>(features_scores<span class="sc">$</span>features <span class="sc">==</span> col),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"accuracy_score"</span>] <span class="ot">=</span> accuracy_score</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>The results are in.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">features_scores</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">accuracy_score</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(features_scores <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(accuracy_score)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -631,16 +614,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="checking-the-results-and-extracting-them" class="level2" data-number="6"><h2 data-number="6" class="anchored" data-anchor-id="checking-the-results-and-extracting-them">
-<span class="header-section-number">6</span> Checking the results and extracting them</h2>
+</section>
+<section id="checking-the-results-and-extracting-them" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="checking-the-results-and-extracting-them"><span class="header-section-number">6</span> Checking the results and extracting them</h2>
 <ul>
 <li>The feature with the best predictive performance for a car insurance claim is <code>driving_experience</code> with a score of 0.7771</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">best_feature</span> <span class="op">&lt;-</span> <span class="va">features_scores</span><span class="op">$</span><span class="va">features</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">features_scores</span><span class="op">$</span><span class="va">accuracy_score</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">best_accuracy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">features_scores</span><span class="op">$</span><span class="va">accuracy_score</span><span class="op">)</span></span>
-<span><span class="va">best_feature_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">best_feature</span>, <span class="va">best_accuracy</span><span class="op">)</span></span>
-<span><span class="va">best_feature_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>best_feature <span class="ot">&lt;-</span> features_scores<span class="sc">$</span>features[<span class="fu">which.max</span>(features_scores<span class="sc">$</span>accuracy_score)]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>best_accuracy <span class="ot">&lt;-</span> <span class="fu">max</span>(features_scores<span class="sc">$</span>accuracy_score)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>best_feature_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(best_feature, best_accuracy)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>best_feature_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -663,8 +647,8 @@ Using correlation as an alternative
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cor_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">features</span>, cor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">clean_data</span>, select <span class="op">=</span> <span class="op">-</span><span class="va">outcome</span><span class="op">)</span>, <span class="va">outcome</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cor_table</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cor_table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(features, <span class="at">cor =</span> <span class="fu">cor</span>(<span class="fu">subset</span>(clean_data, <span class="at">select =</span> <span class="sc">-</span>outcome), outcome))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cor_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -675,10 +659,10 @@ Using correlation as an alternative
 </div>
 <p>Comparing the results reveals that correlation, despite predicting that the first five features have higher accuracy scores, wasn’t a sufficiently good practice for the rest of the features.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">full_table</span> <span class="op">&lt;-</span> <span class="va">cor_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">features_scores</span>, by <span class="op">=</span> <span class="st">"features"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">accuracy_score</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">full_table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>full_table <span class="ot">&lt;-</span> cor_table <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(features_scores, <span class="at">by =</span> <span class="st">"features"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(accuracy_score))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>full_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -689,7 +673,12 @@ Using correlation as an alternative
 </div>
 
 
-</section></main><!-- /main --><!-- 100% privacy-first analytics --><script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<!-- 100% privacy-first analytics -->
+<script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1102,7 +1091,8 @@ Using correlation as an alternative
   });
   </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Made with <a href="https://quarto.org/">Quarto</a> by Aymen Nasri.</p>
 </div>   
@@ -1114,6 +1104,8 @@ Using correlation as an alternative
 </div>
   </div>
 </footer>
+
+
 
 
 </body></html>
